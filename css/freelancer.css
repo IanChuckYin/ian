@@ -61,7 +61,7 @@ quote{
     background: url(../img/please-bg.JPG) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 560px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -78,7 +78,7 @@ quote{
     background: url(../img/projects-bg.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 560px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -95,7 +95,7 @@ quote{
     background: url(../img/skill-set-bg.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 560px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -112,7 +112,7 @@ quote{
     background: url(../img/resume-bg.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 560px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -129,7 +129,7 @@ quote{
     background: url(../img/ian-bgtest.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 560px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -146,7 +146,7 @@ quote{
     background: url(../img/home-bg2.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 580px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
@@ -163,7 +163,7 @@ quote{
     background: url(../img/ian-bg3.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
-    min-height: 500px;
+    min-height: calc(100vh - 5px);
     width: 100%;
 
     -webkit-background-size: 100%;
