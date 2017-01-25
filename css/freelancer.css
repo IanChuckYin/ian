@@ -12,6 +12,7 @@ t{
 }
 p {
   font-size: 17px;
+  color: black;
 }
 p.small {
   font-size: 16px;
@@ -36,10 +37,15 @@ h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
+  color: black;
+  opacity: 1;
 }
 h5{
     text-align: right;
     font-weight: 100;
+}
+hr{
+    border-color: black;
 }
 continue{
     color: #004466;
@@ -55,10 +61,92 @@ uni{
     color: #004466;
 }
 quote{
-    color: #595959;
+    color: #1a1a00;
+}
+.index-text-box{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding-right: 10px;
+    opacity: 0.75;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.about-text-box{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    opacity: 0.88;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.contact-text-box{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    opacity: 0.88;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.skillset-text-box{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px 10px 40px 10px;
+    opacity: 0.75;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.skillset-text-box2{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    opacity: 0.75;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    margin-left: 0px;
+}
+.skillset-text-box3{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    opacity: 0.75;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.projects-text-box{
+    background: #d9d9d9;
+    border-radius: 5px;
+    border: 1px;
+    padding: 10px;
+    opacity: 0.75;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.image-size{
+    width: 100px;
+    height: 80px;
 }
 #about-contact-bg{
-    background: url(../img/please-bg.JPG) no-repeat center top;
+    background: url(../img/contact_bg.JPG) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -75,7 +163,7 @@ quote{
     background-size: cover;
 }
 #projects-bg{
-    background: url(../img/projects-bg.jpg) no-repeat center top;
+    background: url(../img/marble.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -92,7 +180,7 @@ quote{
     background-size: cover;
 }
 #skill-set-bg{
-    background: url(../img/skill-set-bg.jpg) no-repeat center top;
+    background: url(../img/marble.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -109,7 +197,7 @@ quote{
     background-size: cover;
 }
 #resume-bg{
-    background: url(../img/resume-bg.jpg) no-repeat center top;
+    background: url(../img/marble.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -126,7 +214,7 @@ quote{
     background-size: cover;
 }
 #about-bg{
-    background: url(../img/ian-bgtest.jpg) no-repeat center top;
+    background: url(../img/ian-bg.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -143,7 +231,7 @@ quote{
     background-size: cover;
 }
 #index-bg{
-    background: url(../img/home-bg2.jpg) no-repeat center top;
+    background: url(../img/home-bg.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -160,7 +248,7 @@ quote{
     background-size: cover;
 }
 #skillset-bg{
-    background: url(../img/ian-bg3.jpg) no-repeat center top;
+    background: url(../img/marble.jpg) no-repeat center top;
     background-attachment: relative;
     background-position: center center;
     min-height: calc(100vh - 5px);
@@ -213,6 +301,7 @@ hr.star-primary:after {
   margin: 0 auto;
 }
 .navbar-nav > li > .dropdown-menu {
+    z-index: 1;
     background-color: #004466;
 }
 skill-list{
@@ -248,6 +337,7 @@ header .intro-text .skills {
     padding-bottom: 0px;
   }
   header .my-continue{
+    position: relative;
     padding-top: 300px;
     padding-bottom: 0px;
   }
@@ -363,6 +453,7 @@ section.success {
 #skill .skill-item{
     margin 0 0 15px;
     right: 0;
+    color: black;
 }
 #skill .skill-item .skill-link{
     display: block;
