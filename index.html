@@ -9,123 +9,388 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ian Chuck-Yin Portfolio</title>
+    <title>Ian Chuck-Yin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Theme CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 </head>
 
-<body id="page-top" class="index">
-
-<!-- Navigation -->
-<nav class="navbar-default navbar-custom">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="index.html">IAN CHUCK-YIN</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a href="aboutme.html">About</a>
-                </li>
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
-                <li>
-                    <a href="projects.html">Projects</a>
-                </li>
-                <li>
-                    <a href="resume.html">Resume</a>
-                </li>
-                <li>
-                    <a href="skillset.html">Skill Set</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-<!-- Header -->
-<header id="index-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-lg-offset-6">
-                <div class="index-text-box">
-                    <p><h3><em><quote>Creativity begins with stepping out of your comfort zone</quote></em></h3></p>
+<body onload="typeAnimate(), typeAnimate2(), typeAnimate0()">
+    <div id="animateBackground">
+        <nav class="navbar navbar-fixed-top topnav" role="navigation">
+            <div class="topnav">
+                <!-- Mobile Display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand topnav gold fade-in" href="index.html">IC</a>
                 </div>
             </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Main -->
+        <a name="about"></a>
+        <div class="name-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="name-space fade-in-main zoom-in">
+                            <h1 class="title-font" id="animate1"></h1>
+                            <h3 class="title-font" id="animate2"></h3>
+                            <hr id="line">
+                            <!-- About Me Image -->
+                            <div class="myImageSlides move-left">
+                                <img class="img-responsive resize" src="img/ian-bg.jpg">
+                            </div>
+                            <!-- Projects Description
+                            <div class="myImageSlides fade-in">
+                                <img class="img-responsive resize" src="">
+                            </div> -->
+                            <!-- Contact Image -->
+                            <div class="myImageSlides move-up">
+                                <img class="img-responsive resize" src="img/home-bg2.jpg"><br><br>
+                                <p class="contact-text move-left"><i class="fa fa-map-marker fa-2x left"></i>Mississauga, Ontario</p><br><br>
+                                <p class="contact-text move-left"><i class="fa fa-phone fa-2x left"></i>647-470-9115</p><br><br>
+                                <p class="contact-text move-left"><i class="fa fa-cloud fa-2x left"></i>ichuckyi@uwaterloo.ca</p>
+                            </div>
+                            <!-- Skill set Description -->
+                            <div class="myImageSlides fade-in">
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">HTML/CSS/JavaScript</h3>
+                                    <p class="body-text">
+                                        I possess a full understanding of HTML syntax as well as implementing CSS and Bootstrap files to enhance the layout, style, and overall design of a webpage. This includes an understanding of classes, ids, text properties, and keyframes.
+                                        Additional styles I am familiar with include glyphicons and font awesome, which are utilized in this webpage to provide visual representations of text.
+                                        <br>
+                                        <br>
+                                        I am also able to develop customized functions using JavaScript to create an interactive and responsive web design that enhances intimacy with the user. This provides a dynamic environment for the user to explore and interact with the web page. Such functions include animations, transitions, and methods of displaying content.
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">Java</h3>
+                                    <p class="body-text">
+                                        Proficient in the concept of object orientation along with knowledge in key and mouse events, I have experience in game development using JFrames, JApplet, and designing my own sprites. 
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">Python</h3>
+                                    <p class="body-text">
+                                        After taking a full course based solely on Python at the University of Waterloo, as well providing tutoring for peers, I am fully proficient in utilizing Python to develop programs. Such skills include dictionary searches, game development, input and output, reading and creating text files, and a full understanding of all other basic concepts of Python (lists, recursion, loops, etc).
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">SPSS</h3>
+                                    <p class="body-text">
+                                        Able to statistically analyze data using ANOVA, t-tests, and other measures to determine correlations between data. Types of statistics include descriptive, and inferential statistics.
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">SQL and FileMaker</h3>
+                                    <p class="body-text">
+                                        Proficient in creating, organizing, and sorting databases as well as creating relational databases. Also able to filter data through SQL statements.
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">Photoshop</h3>
+                                    <p class="body-text">
+                                        A sufficient understanding of utilizing layers, color modification, and Bezier curves for unique and customized design of an object. Able to edit images through levels adjustments, hue and saturation, cropping, image/canvas resizing, and layer manipulation.
+                                    </p>
+                                </div>
+                                <div class="skills-text zoom-in">
+                                    <h3 class="section-heading-skill-text">Additional Skills</h3>
+                                    <p class="body-text">
+                                        <ul class="body-text">
+                                            <li>
+                                                <p>Computer Systems</p>
+                                            </li>
+                                            <li>
+                                                <p>File Console I/O</p>
+                                            </li>
+                                            <li>
+                                                <p>Databases</p>
+                                            </li>
+                                            <li>
+                                                <p>Binary and Boolean Arithmetic</p>
+                                            </li>
+                                            <li>
+                                                <p>Scheme and Assembly Programming</p>
+                                            </li>
+                                            <li>
+                                                <p>Applications Software Engineering</p>
+                                            </li>
+                                            <li>
+                                                <p>Management Information Systems</p>
+                                            </li>
+                                            <li>
+                                                <p>Health Informatics</p>
+                                            </li>
+                                            <li>
+                                                <p>Statistics for Applied Health Sciences</p>
+                                            </li>
+                                            <li>
+                                                <p>Excel Macros</p>
+                                            </li>
+                                            <li>
+                                                <p>Memory Cache</p>
+                                            </li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-space">
+                        <!-- Menu Items -->
+                            <ul class="button-space list-inline block col-lg-12">
+                                <li class="item1" id="item2" onclick="plusSlides(0)">
+                                    <i class="fa fa-user fa-4x gold pointer"></i>
+                                    <br>
+                                    <h3 class="menu-item" id="aboutAnimate"></h3>
+                                </li>
+                                <!--
+                                <li class="item1" id="item3" onclick="plusSlides(1)">
+                                    <i class="fa fa-gamepad fa-4x gold pointer"></i>
+                                    <br>
+                                    <h3 class="menu-item" id="projectsAnimate"></h3>
+                                </li>-->
+                                <li class="item1" id="item4" onclick="plusSlides(3)"><!--plusSlides(4)-->
+                                    <i class="fa fa-institution fa-4x gold pointer"></i>
+                                    <br>
+                                    <h3 class="menu-item" id="resumeAnimate"></h3>
+                                </li>
+                                <li class="item1" id="item5" onclick="plusSlides(1)"><!--plusSlides(2)-->
+                                    <i class="fa fa-envelope fa-4x gold pointer"></i>
+                                    <br>
+                                    <h3 class="menu-item" id="contactAnimate"></h3>
+                                </li>
+                                <li class="item1" id="item6" onclick="plusSlides(2)"><!--plusSlides(3)-->
+                                    <i class="fa fa-code fa-4x gold pointer"></i>
+                                    <br>
+                                    <h3 class="menu-item" id="skillsetAnimate"></h3>
+                                </li>
+                            </ul>
+                            <!-- About Me -->
+                            <div class="mySlides move-up">
+                                <h2 class="section-heading" id="section-heading-text">About Me</h2>
+                                <p class="body-text col-lg-12" id="text-area">
+                                    I am an undergraduate student at the <a href="https://uwaterloo.ca/">University of Waterloo</a> with a major in <span class='highlightl'>Health Studies</span>, a <span class='highlightl'>Health Informatics Specialization</span>, and a <span class='highlightl'>Computer Science Minor</span>. With the exponential growth of technology usage and advancement in our society, my goal is to implement technology into health care. My passion involves Web Development and developing mobile applications.
+                                    <br>
+                                    <br>
+                                    I was born and raised in Mississauga and eventually enrolled into the Health Studies program at the University of Waterloo. At first I did not know what to pursue and so I challenged myself to prepare for the MCAT and eventually apply for medical school. However, that all changed when I took a health informatics course and realized the massive potential of technology usage in the field of health care. I eagerly wanted to learn programming languages and mobile application development. I began to teach myself programming languages such as <span class='highlight2'>Java</span>, <span class='highlight2'>Python</span>, <span class='highlight2'>HTML/CSS</span>, and <span class='highlight2'>JavaScript</span> while learning programs such as SAS, SPSS, DrRacket, and more Python at the University of Waterloo. Since then, I have been working on web pages (such as this one) and other Java projects to advance my skills as a full stack developer.
+                                </p>
+                            </div>
+                            <!-- Projects
+                            <div class="mySlides fade-in">
+                                <h2 class="section-heading" id="section-heading-text">Projects</h2>
+                                <p class="body-text col-lg-12" id="text-area">Projects are currently under progress...</p>
+                            </div> -->
+                            <!-- Contact -->
+                            <div class="mySlides move-right">
+                                <h2 class="section-heading" id="section-heading-text">Contact</h2>
+                                <p class="body-text col-lg-12" id="text-area">
+                                    If you are interested in getting to know me better, feel free to send me a message and I will get back to you as soon as I can.
+                                    <br>
+                                    <form action="https://formspree.io/iancy@hotmail.ca" method="POST">
+                                            <div class="row control-group move-up">
+                                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                                    <label class="gold">Name</label>
+                                                    <input type="text" name="name" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name."><p class="help-block text-danger"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row control-group move-left">
+                                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                                    <label class="gold">Email Address</label>
+                                                    <input type="email" name="_replyto" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address."><p class="help-block text-danger"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row control-group move-right">
+                                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                                    <label class="gold">Phone Number</label>
+                                                    <input type="tel" name="phone_number" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number."><p class="help-block text-danger"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row control-group move-up">
+                                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                                    <label class="gold">Message</label>
+                                                    <textarea rows="5" name="message" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea><p class="help-block text-danger"></p>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div id="success">
+                                                <div class="row">
+                                                    <div class="form-group col-xs-12">
+                                                        <button type="submit" class="btn btn-success btn-lg btn-block">Send</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </form>
+                                </p>
+                            </div>
+                            <!-- Skill set -->
+                            <div class="mySlides zoom-out">
+                                <h2 class="section-heading-skillset" id="section-heading-text">Skillset</h2>
+                                <p class="body-text col-lg-12" id="text-area">
+                                    <ul class="button-space list-inline block col-lg-12">
+                                        <li>
+                                            <img class="skill-icon" src="img/html_logo.jpg" onclick="plusSkills(0)">
+                                        </li>
+                                        <li>
+                                            <img class="skill-icon" src="img/java_logo.jpg" onclick="plusSkills(1)">
+                                        </li>
+                                        <li>
+                                            <img class="skill-icon" src="img/python_logo.jpg" onclick="plusSkills(2)">
+                                        </li>
+                                        <li>
+                                            <img class="skill-icon" src="img/spss.jpg" onclick="plusSkills(3)">
+                                        </li>
+                                        <li>
+                                            <img class="skill-icon" src="img/sql_logo.jpg" onclick="plusSkills(4)">
+                                        </li>
+                                        <li>
+                                            <img class="skill-icon" src="img/photoshop_logo.jpg" onclick="plusSkills(5)">
+                                        </li>
+                                        <p class="additional-skills" onclick="plusSkills(6)">Additional Skills</p>
+                                    </ul>
+
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Resume -->
+            <div class="mySlides fade-in resume-text">
+                <h2 class="section-heading-resume" id="section-heading-text">Resume</h2>
+                <p class="body-text col-lg-12" id="text-area">
+                <div class="container">
+                    <div class="col-lg-12">
+                        <h4>Education</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-9">
+                        <p>
+                            <strong><t>Bachelor of Science (BSc)</t></strong></br>
+                            University of Waterloo</br>
+                            <em>Major in Health Studies</em></br>
+                            <em>Health Informatics Specialization</em></br>
+                            <em>Minor in Computer Science</em></br>
+                        </p>
+                    </div>
+                    <div class="col-lg-2">
+                        <p><h5>In Progress</h5></p>
+                        <p><h5>Graduating in December 2017</h5></p>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-12">
+                        <h4>Experience</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-9">
+                        <p><strong><t>Physiotherapy Assistant</t></strong><br/>
+                        <em>Integrated Osteopathic and Physiotherapy Clinic</em> <br/>
+                        <em>Mississauga, Ontario</em> <br/>
+                        </p>
+                        <p>Integrated human anatomy and physiology with modern technology. This position involved utilizing therapeutic ultrasound and interferential current to patients for rehabilitation. Patients were assessed through analyzing mobility and body structure to determine abnormalities. Other remedies used include cupping and acupuncture.</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <p><h5>2014 - 2015</h5></p>
+                    </div>
+                </div>
+                <div>
+                    <p></p>
+                </div>
+                <div class="container">
+                    <div class="col-lg-9">
+                        <p><strong><t>Youth Ambassador</t></strong><br/>
+                            <em>Region of Waterloo Public Health</em> <br/>
+                            <em>Waterloo, Ontario</em> <br/>
+                        </p>
+                        <p>Also known as a Youth Engagement Leader, I was involved with implementing, evaluating, and advocating health promotion activities within the Region of Waterloo. This involved developing and delivering presentations to youth, agencies, and the community about health topics important to Waterloo Region's youth. Topics included tobacco control, chronic diseases, and injuries.</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <p><h5>2014 - 2016</h5></p>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-12">
+                        <h4>Awards and certifications</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-9">
+                        <p><strong><t>Term Dean's List</t></strong><br/>
+                        University of Waterloo</br>
+                        </p>
+                    </div>
+                <div class="col-lg-2">
+                    <p><h5>2013 - 2016</h5></p>
+                </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-9">
+                        <p><strong><t>Certified Ontario's G Driver's License</t></strong><br/>
+                        Ontario</br>
+                        </p>
+                    </div>
+                    <div class="col-lg-2">
+                        <p><h5>2016</h5></p>
+                    </div>
+                </div>
+            </p>
         </div>
-        <div class="row">
-            <div class="col-lg-12 my-continue">
-                <p><h3><a href="aboutme.html"><continue>Continue</continue></a></h3></p>
+        </div>
+        
+        <!-- Start Button -->
+        <a name="about"></a>
+        <div class="container intro-header">
+            <div class="intro-message fade-in-main">
+                <h4 id="animate3"></h4>
+                <span class="glyphicon glyphicon-menu-down icons pointer" id="arrow"
+                onclick="fadeOut(this), fadeOut(animate3), typeAnimate3(), /*typeAnimate4(),*/ typeAnimate5(), typeAnimate6(), typeAnimate7(), 
+                fadeIn(item2), /*fadeIn(item3),*/ fadeIn(item4), fadeIn(item5), fadeIn(item6)"></span>
             </div>
         </div>
-        <div>
-            <p></p>
-        </div>
-</header>
+    </div>
 
-<!-- Footer -->
-<footer class="text-center">
-    <div class="footer-below">
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-right col-lg-offset-1">
-                    &copy; Ian Chuck-Yin 2017 |
-                    All Rights Reserved |
-                    Last updated: January 24, 2017
+                <div class="col-lg-12">
+                    <div class="extra">
+                        <h5>647-470-9115</h5>
+                        <h5>Mississauga, Ontario</h5>
+                    </div>
+                    <div class="cr">
+                        <h5>Last Updated: April 27, 2017</h5>
+                        <p class="copyright text-muted small">Copyright &copy; Ian Chuck-Yin 2017. All Rights Reserved</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </footer>
+
+    <!-- My Functions -->
+    <script src="js/my_functions.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
     </div>
-</footer>
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-<div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-    <a class="btn btn-primary" href="#page-top">
-        <i class="fa fa-chevron-up"></i>
-    </a>
-</div>
-
-<!-- jQuery -->
-<script src="vendor/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-<!-- Contact Form JavaScript -->
-<script src="js/jqBootstrapValidation.js"></script>
-<script src="js/contact_me.js"></script>
-
-<!-- Theme JavaScript -->
-<script src="js/freelancer.min.js"></script>
-
 </body>
 
 </html>
