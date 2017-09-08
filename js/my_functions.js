@@ -1,14 +1,14 @@
-var myString = "Ian Chuck-Yin";
+var myString = "IAN CHUCK-YIN";
 var myArray = myString.split("");
 
-function typeAnimate(){
+function typeAnimateName(){
 	if (myArray.length > 0){
-		document.getElementById('animate1').innerHTML += myArray.shift();
+		document.getElementById('name-title').innerHTML += myArray.shift();
 	}
 	else {
 		clearTimeOut(loopTimer);
 	}
-	loopTimer = setTimeout('typeAnimate()', 130)
+	loopTimer = setTimeout('typeAnimateName()', 80)
 }
 //
 var myString2 = "Health Informatics and Computer Science";
