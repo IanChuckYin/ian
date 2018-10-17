@@ -1,0 +1,192 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="ian-resume-cards">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                width: 100%;
+            }
+
+            .card {
+                color: #F1F3F2;
+                background-color: transparent;
+            }
+
+            .card-text {
+                line-height: 40px;
+                padding-bottom: 250px;
+                font-size: 18px;
+            }
+
+            td {
+                width: 50%;
+                vertical-align: top;
+            }
+
+            .image-container {
+                text-align: center;
+            }
+
+            .line {
+                width: 5%;
+                height: 2px;
+                background-color: #66FCF1;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .bullet {
+                margin: 30px 0px;
+            }
+
+            .bullet-line {
+                width: 2%;
+                height: 2px;
+                background-color: #66FCF1;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .title {
+                font-size: 48px;
+                letter-spacing: 20px;
+                line-height: 0;
+                color: #66FCF1;
+            }
+
+            hr {
+                width: 2%;
+                display: inline-block;
+                vertical-align: middle;
+                border: 1px solid #66FCF1;
+            }
+
+            .company-header {
+                line-height: 1;
+                margin: 0px -10px 30px -10px;
+                font-size: 22px;
+                color: #66FCF1;
+            }
+        </style>
+        <div class="card">
+            <div id="title">
+                <p class="title">{{text.experience.title.content}}</p>
+            </div>
+            <hr>
+            <table>
+                <template is="dom-repeat" items="{{text.experience.content}}">
+                    <template is="dom-if" if="{{_leftAlign(item.align)}}">
+                        <tr>
+                            <td>
+                                <div class="card-text">
+                                    <div class="company-header hide" id="{{item.headerID}}">
+                                        <div class="line"></div>
+                                        {{item.company}}
+                                        <div class="line"></div>
+                                        <p>{{item.role}}</p>
+                                        <p>{{item.date}}</p>
+                                    </div>
+                                    <template is="dom-repeat" items="{{item.details.content}}">
+                                        <div id="{{item.id}}" class="hide bullet">
+                                            <div class="bullet-line"></div>
+                                            {{item.bullet}}
+                                        </div>
+                                    </template>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="image-container hide" id="{{item.logo.id}}">
+                                    <img src="{{path}}{{item.logo.image}}">
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                    <template is="dom-if" if="{{_rightAlign(item.align)}}">
+                        <tr>
+                            <td>
+                                <div class="image-container hide" id="{{item.logo.id}}">
+                                    <img src="{{path}}{{item.logo.image}}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="card-text">
+                                    <div class="company-header hide" id="{{item.headerID}}">
+                                        <div class="line"></div>
+                                        {{item.company}}
+                                        <div class="line"></div>
+                                        <p>{{item.role}}</p>
+                                        <p>{{item.date}}</p>
+                                    </div>
+                                    <template is="dom-repeat" items="{{item.details.content}}">
+                                        <div id="{{item.id}}" class="hide bullet">
+                                            <div class="bullet-line"></div>
+                                            {{item.bullet}}
+                                        </div>
+                                    </template>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </template>
+            </table>
+        </div>
+    </template>
+
+    <script>
+        class ResumeCard extends Polymer.Element {
+            static get is() { return 'ian-resume-cards'; }
+            static get properties() {
+                return {
+                    path: {
+                        type: String,
+                        value: "../../images/"
+                    }
+                }
+            }
+
+            _rightAlign(align) {
+                return align == "right" ? true : false;
+            }
+
+            _leftAlign(align) {
+                return align == "left" ? true : false;
+            }
+
+            ready() {
+                super.ready();
+            }
+
+            _resetExperienceComponents() {
+                var experiences = this.text.experience;
+                var self = this;
+                var experienceTitleElement = this.$.title;
+
+                _removeCSS(experienceTitleElement, experiences.title.animation);
+                _hide(experienceTitleElement);
+
+                experiences.content.forEach(function (experience) {
+                    // For experience headers
+                    var experienceHeaderElement = self.shadowRoot.querySelector('#' + experience.headerID);
+                    _removeCSS(experienceHeaderElement, experience.headerAnimation);
+                    _hide(experienceHeaderElement);
+
+                    // For experience paragraphs
+                    experience.details.content.forEach(function (paragraph) {
+                        var paragraphElement = self.shadowRoot.querySelector('#' + paragraph.id);
+                        _removeCSS(paragraphElement, experience.details.animation);
+                        _hide(paragraphElement);
+                    })
+
+                    // For images
+                    var imageElement = self.shadowRoot.querySelector('#' + experience.logo.id);
+                    _removeCSS(imageElement, experience.logo.animation);
+                    _hide(imageElement);
+                });
+            }
+        }
+
+        window.customElements.define(ResumeCard.is, ResumeCard);
+    </script>
+</dom-module>

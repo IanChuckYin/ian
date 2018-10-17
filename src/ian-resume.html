@@ -1,0 +1,189 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="common-elements/common-elements.html">
+
+<dom-module id="ian-resume">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .resume-container {
+        padding: 24px 48px;
+      }
+
+      .button-container {
+        margin-top: -200px;
+        text-align: center;
+      }
+
+      paper-button {
+        color: #272424;
+        border: 1px solid #272424;
+        background-color: #F1F3F2;
+      }
+
+      paper-button:hover {
+        color: #66FCF1;
+        border: 1px solid #66FCF1;
+        background-color: #272424;
+      }
+
+      iron-icon {
+        margin-right: 5px;
+      }
+    </style>
+
+    <div class="resume-container">
+      <ian-page-title text="{{resume.pageName.content}}" id="title" class="hide"></ian-page-title>
+      <div class="resume-content-container">
+        <ian-education-cards text="{{resume}}" id="education"></ian-education-cards>
+        <ian-resume-cards text="{{resume}}" id="experience"></ian-resume-cards>
+      </div>
+      <div class="button-container" id="pdfbutton">
+        <paper-button on-click="_openModal">
+          <iron-icon icon="{{resume.pdf.buttonIcon}}"></iron-icon>
+          {{resume.pdf.buttonText}}
+        </paper-button>
+      </div>
+    </div>
+    <ian-modal content="{{resume.pdf.fileName}}" id="modal"></ian-modal>
+    <div class="divider"></div>
+    <ian-footer footer="{{footer}}"></ian-footer>
+  </template>
+
+  <script>
+    class Resume extends Polymer.Element {
+      static get is() { return 'ian-resume'; }
+      static get properties() {
+        return {
+          selected: {
+            type: Boolean,
+            value: false,
+            observer: '_pageSelected'
+          },
+          intro: {
+            type: Boolean,
+            value: false,
+            observer: '_introComplete'
+          }
+        }
+      }
+
+      _openModal() {
+        var modal = this.$.modal.shadowRoot.querySelector('#modal');
+
+        modal.style.display = "block";
+      }
+
+      ready() {
+        super.ready();
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          this._initializeWindowScroll();
+        })
+      }
+
+      _introComplete(complete) {
+        if (complete) {
+          this._pageSelected(true);
+        }
+      }
+
+      _pageSelected(selected) {
+        if (selected && this.intro) {
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            window.scrollTo(0, 0);
+            this._resetPage();
+            this._initializeResume();
+          });
+        }
+      }
+
+      _resetPage() {
+        var pageTitleElement = this.$.title;
+        var educationElement = this.$.education;
+        var experienceElement = this.$.experience;
+
+        _removeCSS(pageTitleElement, this.resume.pageName.animation);
+        _hide(pageTitleElement);
+
+        educationElement._resetEducationComponents();
+        experienceElement._resetExperienceComponents();
+      }
+
+      _initializeResume() {
+        var self = this;
+        var timer = Polymer.Async.timeOut;
+        var educationComponent = this.$.education;
+        var resumeConfig = this.resume.education;
+
+        var pageTitleElement = this.$.title;
+        var educationTitleELement = educationComponent.shadowRoot.querySelector('#title');
+        var educationContentELement = educationComponent.shadowRoot.querySelector('#educationcontent');
+        var educationImageElement = educationComponent.shadowRoot.querySelector('#educationimage');
+
+        _show(pageTitleElement);
+        _addCSS(pageTitleElement, this.resume.pageName.animation);
+
+        _show(educationTitleELement);
+        _addCSS(educationTitleELement, resumeConfig.title.animation);
+
+        _show(educationContentELement);
+        _addCSS(educationContentELement, resumeConfig.animation);
+
+        _show(educationImageElement);
+        _addCSS(educationImageElement, resumeConfig.imageAnimation);
+      }
+
+      _initializeWindowScroll() {
+        var self = this;
+
+        var experienceElement = this.$.experience;
+        var experienceTitleElement = experienceElement.shadowRoot.querySelector('#title');
+
+        // For the experience paragraphs
+        var experienceHeaders = [];
+        var experienceParagraphs = [];
+        var images = [];
+
+        this.resume.experience.content.forEach(function (experience) {
+          var header = experienceElement.shadowRoot.querySelector('#' + experience.headerID);
+          experienceHeaders.push([header, experience.headerAnimation]);
+
+          experience.details.content.forEach(function (paragraph) {
+            var bullet = experienceElement.shadowRoot.querySelector('#' + paragraph.id);
+            experienceParagraphs.push([bullet, experience.details.animation]);
+          })
+
+          var image = experienceElement.shadowRoot.querySelector('#' + experience.logo.id);
+          images.push([image, experience.logo.animation]);
+        });
+
+        $(window).scroll(function () {
+          if (self.selected) {
+            // CHeck if experience title is in view
+            _checkIfInView(experienceTitleElement, self.resume.experience.title.animation, 'hide', true);
+
+            // Check if experience headers are in view
+            experienceHeaders.forEach(function (header) {
+              _checkIfInView(header[0], header[1], 'hide', true);
+            });
+
+            // Check if experience images are in view
+            images.forEach(function (image) {
+              _checkIfInView(image[0], image[1], 'hide', true);
+            })
+
+            // Check if bullets are in view
+            experienceParagraphs.forEach(function (experience) {
+              _checkIfInView(experience[0], experience[1], 'hide', true);
+            });
+          }
+        });
+      }
+    }
+
+    window.customElements.define(Resume.is, Resume);
+  </script>
+</dom-module>
