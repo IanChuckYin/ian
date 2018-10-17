@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="ian-cards">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+      }
+
+      .card {
+        color: #F1F3F2;
+        background-color: transparent;
+      }
+
+      .card-text {
+        line-height: 40px;
+        padding-bottom: 250px;
+        font-size: 18px;
+      }
+
+      td {
+        width: 60%;
+        vertical-align: top;
+      }
+
+      .image-container {
+        text-align: center;
+      }
+
+      .line {
+        width: 5%;
+        height: 2px;
+        background-color: #66FCF1;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    </style>
+    <div class="card">
+      <table>
+        <template is="dom-repeat" items="{{text}}">
+          <template is="dom-if" if="{{_leftAlign(item.align)}}">
+            <tr>
+              <td>
+                <div class="card-text hide" id="{{item.id}}">
+                  <div class="line"></div>
+                  {{item.content}}
+                  <div class="line"></div>
+                </div>
+              </td>
+              <td>
+                <div class="image-container hide" id="{{item.imageID}}">
+                  <img src="{{path}}{{item.image}}">
+                </div>
+              </td>
+            </tr>
+          </template>
+          <template is="dom-if" if="{{_rightAlign(item.align)}}">
+            <tr>
+              <td>
+                <div class="image-container hide" id="{{item.imageID}}">
+                  <img src="{{path}}{{item.image}}">
+                </div>
+              </td>
+              <td>
+                <div class="card-text hide" id="{{item.id}}">
+                  <div class="line"></div>
+                  {{item.content}}
+                  <div class="line"></div>
+              </td>
+            </tr>
+          </template>
+        </template>
+      </table>
+      </div>
+  </template>
+
+  <script>
+    class Card extends Polymer.Element {
+      static get is() { return 'ian-cards'; }
+      static get properties() {
+        return {
+          path: {
+            type: String,
+            value: "../../images/"
+          }
+        }
+      }
+
+      _rightAlign(align) {
+        return align == "right" ? true : false;
+      }
+
+      _leftAlign(align) {
+        return align == "left" ? true : false;
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _resetCardComponents() {
+        var aboutMe = this.text;
+        var self = this;
+
+        aboutMe.forEach(function (about) {
+          // For paragraphs
+          var paragraphElement = self.shadowRoot.querySelector('#' + about.id);
+          paragraphElement.classList.remove(about.animation);
+          _hide(paragraphElement);
+
+          // For images
+          var imageElement = self.shadowRoot.querySelector('#' + about.imageID);
+          imageElement.classList.remove(about.imageAnimation);
+          _hide(imageElement);
+        });
+      }
+    }
+
+    window.customElements.define(Card.is, Card);
+  </script>
+</dom-module>

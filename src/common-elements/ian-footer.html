@@ -1,0 +1,71 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="ian-footer">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                background-color: #272424;
+                height: 100%;
+            }
+
+            .footer {
+                text-align: center;
+            }
+
+            .footer-name {
+                text-align: left;
+                display: inline-block;
+                vertical-align: middle;
+                width: 45%;
+                font-size: 24px;
+                letter-spacing: 20px;
+                color: #F1F3F2;
+            }
+
+            .contact-info {
+                text-align: right;
+                display: inline-block;
+                vertical-align: middle;
+                width: 45%;
+                color: #66FCF1;
+            }
+        </style>
+        <div class="footer">
+            <div class="footer-name">
+                {{footer.myName}}
+            </div>
+            <div class="contact-info">
+                <p>
+                    <iron-icon icon="{{footer.location.1}}"></iron-icon>
+                    {{footer.location.0}}
+                </p>
+                <p>
+                    <iron-icon icon="{{footer.email.1}}"></iron-icon>
+                    {{footer.email.0}}
+                </p>
+                <p>
+                    <iron-icon icon="{{footer.phone.1}}"></iron-icon>
+                    {{footer.phone.0}}
+                </p>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class Footer extends Polymer.Element {
+            static get is() { return 'ian-footer'; }
+            static get properties() {
+                return {
+                }
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+
+        window.customElements.define(Footer.is, Footer);
+    </script>
+</dom-module>
