@@ -1,0 +1,248 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="config.html">
+<link rel="import" href="intro-panel.html">
+
+<link rel="lazy-import" href="ian-home.html">
+<link rel="lazy-import" href="ian-projects.html">
+<link rel="lazy-import" href="ian-resume.html">
+<link rel="lazy-import" href="ian-contact.html">
+<link rel="lazy-import" href="ian-404.html">
+
+<script src="common-elements/functions.js"></script>
+
+<dom-module id="my-app">
+  <template>
+    <style>
+      :host {
+        --color-1: #272424;
+        --color-2: #66FCF1;
+        --color-3: #F1F3F2;
+
+        display: block;
+      }
+
+      app-drawer {
+        --app-drawer-content-container: {
+          background-color: var(--color-1);
+        }
+        --app-drawer-width: 100%;
+      }
+
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+      app-header {
+        color: var(--color-4);
+        width: 15%;
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: var(--color-2);
+      }
+
+      paper-icon-button:hover {
+        width: 50px;
+        height: 50px;
+        transition: 0.3s;
+      }
+
+      app-toolbar {
+        color: var(--color-2);
+        letter-spacing: 10px;
+        font-size: 12px;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a:first-child {
+        border-top: 1px solid #66FCF1;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 50px 16px;
+        text-decoration: none;
+        color: #F1F3F2;
+        line-height: 40px;
+        text-align: center;
+        font-size: 28px;
+        letter-spacing: 16px;
+        border-bottom: 1px solid #66FCF1;
+        border-top: none;
+      }
+
+      .drawer-list a:hover {
+        background-color: none;
+        color: #66FCF1;
+        transition: 0.3s;
+      }
+
+      .drawer-list a.iron-selected {
+        color: #F1F3F2;
+        font-weight: bold;
+        background: url("../images/slider-bg.jpg") no-repeat;
+        background-size: 100%;
+      }
+    </style>
+
+    <iron-media-query query="min-width: 768px" query-matches="{{wideLayout}}"></iron-media-query>
+
+    <page-config on-intro="_setIntro" on-config="_setConfig" on-content="_loadContent" on-footer="_loadFooter"></page-config>
+
+    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+    </app-location>
+
+    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
+    </app-route>
+
+    <app-drawer-layout fullbleed force-narrow narrow="{{narrow}}">
+      <!-- Drawer content -->
+      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+        <app-toolbar>
+          <paper-icon-button icon="icons:close" drawer-toggle></paper-icon-button>
+        </app-toolbar>
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+          <template is="dom-repeat" items="{{pages}}">
+            <a name="{{item.name}}" href="[[rootPath]]{{item.path}}">{{item.pageName}}</a>
+          </template>
+        </iron-selector>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout>
+
+        <app-header slot="header" condenses reveals fixed>
+          <app-toolbar>
+            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main" selected-attribute="selected">
+          <ian-home name="home" about="{{about}}" intro="{{introComplete}}" footer="{{footer}}" wide="{{wideLayout}}"></ian-home>
+          <ian-projects name="projects" projects="{{projects}}" intro="{{introComplete}}" footer="{{footer}}" wide="{{wideLayout}}"></ian-projects>
+          <ian-resume name="resume" resume="{{resume}}" intro="{{introComplete}}" footer="{{footer}}" wide="{{wideLayout}}"></ian-resume>
+          <ian-contact name="contact" contact="{{contact}}" intro="{{introComplete}}" footer="{{footer}}" wide="{{wideLayout}}"></ian-contact>
+          <ian-404 name="view404"></ian-404>
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+
+    <intro-panel intro="{{intro}}" on-intro-complete="_introComplete"></intro-panel>
+
+  </template>
+
+  <script>
+    // Gesture events like tap and track generated from touch will not be
+    // preventable, allowing for better scrolling performance.
+    Polymer.setPassiveTouchGestures(true);
+
+    class MyApp extends Polymer.Element {
+      static get is() { return 'my-app'; }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          },
+          routeData: Object,
+          subroute: Object,
+          // This shouldn't be neccessary, but the Analyzer isn't picking up
+          // Polymer.Element#rootPath
+          rootPath: String,
+          title: {
+            type: String
+          },
+          wideLayout: {
+            type: Boolean,
+            value: false,
+            observer: 'onLayoutChange',
+          },
+        };
+      }
+
+      onLayoutChange(wide) {
+        return;
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)',
+        ];
+      }
+
+      _setIntro(e) {
+        this.set("intro", e.detail);
+      }
+
+      _setConfig(e) {
+        this.set("pages", e.detail);
+      }
+
+      _loadContent(e) {
+        this.set("about", e.detail.home);
+        this.set("projects", e.detail.projects);
+        this.set("resume", e.detail.resume);
+        this.set("contact", e.detail.contact);
+      }
+
+      _loadFooter(e) {
+        this.set('footer', e.detail);
+      }
+
+      _introComplete(e) {
+        this.set('introComplete', e.detail);
+      }
+
+      _routePageChanged(page) {
+        // If no page was found in the route data, page will be an empty string.
+        // Default to 'view1' in that case.
+        this.page = page || 'home';
+
+        // Close a non-persistent drawer when the page & route are changed.
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      }
+
+      _pageChanged(page) {
+        // Load page import on demand. Show 404 page if fails
+        const resolvedPageUrl = this.resolveUrl('ian-' + page + '.html');
+        Polymer.importHref(
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
+      }
+
+      _showPage404() {
+        this.page = '404';
+      }
+    }
+
+    window.customElements.define(MyApp.is, MyApp);
+  </script>
+</dom-module>

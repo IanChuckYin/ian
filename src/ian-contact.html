@@ -1,0 +1,305 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="common-elements/common-elements.html">
+
+<dom-module id="ian-contact">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        color: white;
+      }
+
+      .contact-container {
+        padding: 24px 56px;
+      }
+
+      .form-container {
+        padding: 0px 0px 50px 0px;
+        font-size: 24px;
+      }
+
+      .form-table {
+        min-width: 750px;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+      }
+
+      .form-table td {
+        vertical-align: top;
+        width: 30%;
+      }
+
+      .input-box {
+        height: 40px;
+        width: 97.5%;
+        margin-bottom: 20px;
+        background-color: #F1F3F2;
+        font-size: 14px;
+      }
+
+      .message-box {
+        height: 120px;
+        width: 97.5%;
+        background-color: #F1F3F2;
+      }
+
+      .send {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        background-color: #F1F3F2;
+        font-size: 18px;
+        letter-spacing: 2px;
+        color: #272424;
+        border: 2px solid #272424;
+      }
+
+      .send:hover {
+        cursor: pointer;
+        background-color: #272424;
+        color: #66FCF1;
+        border: 1px solid #66FCF1;
+      }
+
+      ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #C2D3Da;
+        opacity: 1;
+        /* Firefox */
+        font-size: 14px;
+      }
+
+      :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #C2D3Da;
+        font-size: 14px;
+      }
+
+      .message {
+        text-align: center;
+        color: #66FCF1;
+        margin: 50px 0px;
+        font-size: 16px;
+      }
+
+      .line {
+        width: 2%;
+        height: 2px;
+        background-color: #66FCF1;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* MOBILE CSS */
+      .m-contact-container {
+        padding: 15px;
+      }
+
+      .m-form-container {
+        padding: 0px 0px 50px 0px;
+        font-size: 18px;
+      }
+
+      .m-form-table {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <!-- DESKTOP VERSION -->
+    <template is="dom-if" if="{{wide}}">
+      <div class="contact-container">
+        <ian-page-title text="{{contact.pageName.content}}" id="title" class="hide" wide="{{wide}}"></ian-page-title>
+        <div class="message fade-in-move-down">
+          <div class="line"></div>
+          {{contact.message}}
+          <div class="line"></div>
+        </div>
+        <div class="form-container">
+          <form action="{{contact.form.url}}{{contact.form.email}}" method="POST">
+            <table class="form-table">
+              <template is="dom-repeat" items="{{contact.form.fields}}">
+                <tr id="{{item.rowID}}" class="hide">
+                  <div class="form-row">
+                    <td>
+                      <iron-icon icon="{{item.icon}}"></iron-icon>
+                      <label>{{item.label}}</label>
+                    </td>
+                    <td>
+                      <template is="dom-if" if="{{_checkType(item.type)}}">
+                        <input class="input-box" type="{{item.type}}" name="{{item.label}}" placeholder="{{item.label}}" id="{{item.id}}" required
+                          data-validation-required-message="{{item.requiredMessage}}">
+                      </template>
+                      <template is="dom-if" if="{{!_checkType(item.type)}}">
+                        <textarea class="message-box" rows="5" name="{{item.label}}" placeholder="{{item.label}}" id="{{item.id}}" required data-validation-required-message="{{item.requiredMessage}}"></textarea>
+                      </template>
+                    </td>
+                  </div>
+                </tr>
+              </template>
+              <tr>
+                <td colspan="2">
+                  <div id="send" class="hide">
+                    <button type="submit" class="send">
+                      <iron-icon icon="{{contact.form.button.icon}}"></iron-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </template>
+
+    <!-- MOBILE VERSION -->
+    <template is="dom-if" if="{{!wide}}">
+        <div class="m-contact-container">
+          <ian-page-title text="{{contact.pageName.content}}" id="title" class="hide" wide="{{wide}}"></ian-page-title>
+          <div class="message fade-in-move-down">
+            <div class="line"></div>
+            {{contact.message}}
+            <div class="line"></div>
+          </div>
+          <div class="m-form-container">
+            <form action="{{contact.form.url}}{{contact.form.email}}" method="POST">
+              <table class="m-form-table">
+                <template is="dom-repeat" items="{{contact.form.fields}}">
+                  <tr id="{{item.rowID}}" class="hide">
+                    <div class="form-row">
+                      <td>
+                        <iron-icon icon="{{item.icon}}"></iron-icon>
+                        <label>{{item.label}}</label>
+                      </td>
+                      <td>
+                        <template is="dom-if" if="{{_checkType(item.type)}}">
+                          <input class="input-box" type="{{item.type}}" name="{{item.label}}" placeholder="{{item.label}}" id="{{item.id}}" required
+                            data-validation-required-message="{{item.requiredMessage}}">
+                        </template>
+                        <template is="dom-if" if="{{!_checkType(item.type)}}">
+                          <textarea class="message-box" rows="5" name="{{item.label}}" placeholder="{{item.label}}" id="{{item.id}}" required data-validation-required-message="{{item.requiredMessage}}"></textarea>
+                        </template>
+                      </td>
+                    </div>
+                  </tr>
+                </template>
+                <tr>
+                  <td colspan="2">
+                    <div id="send" class="hide">
+                      <button type="submit" class="send">
+                        <iron-icon icon="{{contact.form.button.icon}}"></iron-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+    </template>
+    <div class="divider"></div>
+    <ian-footer footer="{{footer}}" wide="{{wide}}"></ian-footer>
+  </template>
+
+  <script>
+    class Contact extends Polymer.Element {
+      static get is() { return 'ian-contact'; }
+      static get properties() {
+        return {
+          selected: {
+            type: Boolean,
+            value: false,
+            observer: '_pageSelected'
+          },
+          intro: {
+            type: Boolean,
+            value: false,
+            observer: '_introComplete'
+          }
+        }
+      }
+
+      _checkType(type) {
+        return type == "single" ? true : false;
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _introComplete(complete) {
+        if (complete) {
+          this._pageSelected(true);
+        }
+      }
+
+      _pageSelected(selected) {
+        if (selected && this.intro) {
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            window.scrollTo(0, 0);
+            this._resetPage();
+            this._initializeContact();
+          });
+        }
+      }
+
+      _resetPage() {
+        var self = this;
+        var pageTitleElement = this.shadowRoot.querySelector('#title');
+        var sendButtonElement = this.shadowRoot.querySelector('#send');
+
+        pageTitleElement.classList.remove(this.contact.pageName.animation)
+        _hide(pageTitleElement);
+
+        sendButtonElement.classList.remove(this.contact.form.button.animation);
+        _hide(sendButtonElement);
+
+        this.contact.form.fields.forEach(function (field) {
+          var fieldElement = self.shadowRoot.querySelector('#' + field.rowID);
+          fieldElement.classList.remove(field.animation);
+          _hide(fieldElement);
+        });
+      }
+
+      _initializeContact() {
+        var self = this;
+        var timer = Polymer.Async.timeOut;
+        var formField = this.contact.form.fields;
+
+        var pageTitleElement = this.shadowRoot.querySelector('#title');
+        var sendButtonElement = this.shadowRoot.querySelector('#send');
+
+        var inputs = [];
+        var delay = 10;
+
+        // Store input element, animation, and delay time
+        formField.forEach(function (input) {
+          var inputElement = self.shadowRoot.querySelector('#' + input.rowID);
+          inputs.push([inputElement, input.animation, delay]);
+          delay += 300;
+        })
+
+        // Animation for each input, in delay intervals
+        inputs.forEach(function (input) {
+          timer.run(function () {
+            input[0].classList.remove('hide');
+            input[0].classList.add(input[1]);
+          }, input[2]);
+        });
+
+        // Animation for SEND button
+        timer.run(function () {
+          sendButtonElement.classList.remove('hide');
+          sendButtonElement.classList.add(self.contact.form.button.animation);
+        }, delay);
+
+        pageTitleElement.classList.remove('hide');
+        pageTitleElement.classList.add(this.contact.pageName.animation);
+      }
+    }
+
+    window.customElements.define(Contact.is, Contact);
+  </script>
+</dom-module>

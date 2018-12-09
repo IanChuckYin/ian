@@ -1,0 +1,216 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="common-elements/common-elements.html">
+
+<dom-module id="ian-resume">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .resume-container {
+        padding: 24px 56px;
+      }
+
+      .button-container {
+        margin-top: -100px;
+        text-align: center;
+      }
+
+      paper-button {
+        color: #272424;
+        border: 1px solid #272424;
+        background-color: #F1F3F2;
+      }
+
+      paper-button:hover {
+        color: #66FCF1;
+        border: 1px solid #66FCF1;
+        background-color: #272424;
+      }
+
+      iron-icon {
+        margin-right: 5px;
+      }
+
+      /* MOBILE CSS */
+      .m-resume-container {
+        padding: 15px;
+      }
+    </style>
+
+    <!-- DESKTOP VERSION -->
+    <template is="dom-if" if="{{wide}}">
+      <div class="resume-container">
+        <ian-page-title text="{{resume.pageName.content}}" id="title" class="hide" wide="{{wide}}"></ian-page-title>
+        <ian-education-cards text="{{resume}}" id="education" wide="{{wide}}"></ian-education-cards>
+        <ian-resume-cards text="{{resume}}" id="experience" wide="{{wide}}"></ian-resume-cards>
+        <div class="button-container" id="pdfbutton">
+          <paper-button on-click="_openModal">
+            <iron-icon icon="{{resume.pdf.buttonIcon}}"></iron-icon>
+            {{resume.pdf.buttonText}}
+          </paper-button>
+        </div>
+      </div>
+    </template>
+
+    <!-- MOBILE VERSION -->
+    <template is="dom-if" if="{{!wide}}">
+      <div class="m-resume-container">
+        <ian-page-title text="{{resume.pageName.content}}" id="title" class="hide" wide="{{wide}}"></ian-page-title>
+        <ian-education-cards text="{{resume}}" id="education" wide="{{wide}}"></ian-education-cards>
+        <ian-resume-cards text="{{resume}}" id="experience" wide="{{wide}}"></ian-resume-cards>
+        <div class="button-container" id="pdfbutton">
+          <paper-button on-click="_openModal">
+            <iron-icon icon="{{resume.pdf.buttonIcon}}"></iron-icon>
+            {{resume.pdf.buttonText}}
+          </paper-button>
+        </div>
+      </div>
+    </template>
+
+    <ian-modal content="{{resume.pdf.fileName}}" id="modal" type="pdf"></ian-modal>
+    <div class="divider"></div>
+    <ian-footer footer="{{footer}}" wide="{{wide}}"></ian-footer>
+  </template>
+
+  <script>
+    class Resume extends Polymer.Element {
+      static get is() { return 'ian-resume'; }
+      static get properties() {
+        return {
+          selected: {
+            type: Boolean,
+            value: false,
+            observer: '_pageSelected'
+          },
+          intro: {
+            type: Boolean,
+            value: false,
+            observer: '_introComplete'
+          }
+        }
+      }
+
+      _openModal() {
+        var modal = this.$.modal.shadowRoot.querySelector('#modal');
+
+        modal.style.display = "block";
+      }
+
+      ready() {
+        super.ready();
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          this._initializeWindowScroll();
+        })
+      }
+
+      _introComplete(complete) {
+        if (complete) {
+          this._pageSelected(true);
+        }
+      }
+
+      _pageSelected(selected) {
+        if (selected && this.intro) {
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            window.scrollTo(0, 0);
+            this._resetPage();
+            this._initializeResume();
+          });
+        }
+      }
+
+      _resetPage() {
+        var pageTitleElement = this.shadowRoot.querySelector('#title');
+        var educationElement = this.shadowRoot.querySelector('#education');
+        var experienceElement = this.shadowRoot.querySelector('#experience');
+        var modal = this.$.modal.shadowRoot.querySelector('#modal');
+
+        _removeCSS(pageTitleElement, this.resume.pageName.animation);
+        _hide(pageTitleElement);
+
+        educationElement._resetEducationComponents();
+        experienceElement._resetExperienceComponents();
+
+        modal.style.display = "none";
+      }
+
+      _initializeResume() {
+        var self = this;
+        var timer = Polymer.Async.timeOut;
+        var educationComponent = this.shadowRoot.querySelector('#education');
+        var resumeConfig = this.resume.education;
+
+        var pageTitleElement = this.shadowRoot.querySelector('#title');
+        var educationTitleELement = educationComponent.shadowRoot.querySelector('#title');
+        var educationContentELement = educationComponent.shadowRoot.querySelector('#educationcontent');
+        var educationImageElement = educationComponent.shadowRoot.querySelector('#educationimage');
+
+        _show(pageTitleElement);
+        _addCSS(pageTitleElement, this.resume.pageName.animation);
+
+        _show(educationTitleELement);
+        _addCSS(educationTitleELement, resumeConfig.title.animation);
+
+        _show(educationContentELement);
+        _addCSS(educationContentELement, resumeConfig.animation);
+
+        timer.run(function () {
+          _show(educationImageElement);
+          _addCSS(educationImageElement, resumeConfig.imageAnimation);
+        }, 500);
+      }
+
+      _initializeWindowScroll() {
+        var self = this;
+
+        var experienceElement = this.shadowRoot.querySelector('#experience');
+        var experienceTitleElement = experienceElement.shadowRoot.querySelector('#title');
+
+        // For the experience paragraphs
+        var experienceHeaders = [];
+        var experienceParagraphs = [];
+        var images = [];
+
+        this.resume.experience.content.forEach(function (experience) {
+          var header = experienceElement.shadowRoot.querySelector('#' + experience.headerID);
+          experienceHeaders.push([header, experience.headerAnimation]);
+
+          experience.details.content.forEach(function (paragraph) {
+            var bullet = experienceElement.shadowRoot.querySelector('#' + paragraph.id);
+            experienceParagraphs.push([bullet, experience.details.animation]);
+          })
+
+          var image = experienceElement.shadowRoot.querySelector('#' + experience.logo.id);
+          images.push([image, experience.logo.animation]);
+        });
+
+        $(window).scroll(function () {
+          if (self.selected) {
+            // CHeck if experience title is in view
+            _checkIfInView(experienceTitleElement, self.resume.experience.title.animation, 'hide', true);
+
+            // Check if experience headers are in view
+            experienceHeaders.forEach(function (header) {
+              _checkIfInView(header[0], header[1], 'hide', true);
+            });
+
+            // Check if experience images are in view
+            images.forEach(function (image) {
+              _checkIfInView(image[0], image[1], 'hide', true);
+            })
+
+            // Check if bullets are in view
+            experienceParagraphs.forEach(function (experience) {
+              _checkIfInView(experience[0], experience[1], 'hide', true);
+            });
+          }
+        });
+      }
+    }
+
+    window.customElements.define(Resume.is, Resume);
+  </script>
+</dom-module>
