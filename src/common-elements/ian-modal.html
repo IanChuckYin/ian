@@ -1,0 +1,95 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="ian-modal">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+
+            .modal-container {
+                display: none;
+                position: fixed;
+                z-index: 5;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+                overflow-y: auto;
+            }
+
+            .modal-content {
+                background-color: transparent;
+                margin: 1% auto;
+                width: 50%;
+                text-align: center;
+                height: 100%;
+            }
+
+            paper-icon-button {
+                color: #F1F3F2;
+                float: right;
+                width: 100px;
+                height: 100px;
+                padding: 0;
+                margin-right: 15px;
+                margin-top: 15px;
+            }
+
+            paper-icon-button:hover {
+                color: #66FCF1;
+            }
+        </style>
+        <div class="modal-container" id="modal">
+            <paper-icon-button icon="icons:cancel" on-click="_closeModal"></paper-icon-button>
+            <div class="modal-content">
+                <p>YO</p>
+                <template is="dom-if" if="{{_ifPDF()}}">
+                    <object data="{{path}}{{content}}" width="600" height="850" type="application/pdf"></object>
+                </template>
+                <template is="dom-if" if="{{_ifProject()}}">
+                    <p>{{content}}</p>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class Modal extends Polymer.Element {
+            static get is() { return 'ian-modal'; }
+            static get properties() {
+                return {
+                    path: {
+                        type: String,
+                        value: "../../images/"
+                    },
+                    type: {
+                        type: String
+                    }
+                }
+            }
+
+            _ifPDF() {
+                return this.type == "pdf" ? true : false;
+            }
+
+            _ifProject() {
+                return this.type == "project" ? true : false;
+            }
+
+            _closeModal() {
+                var modal = this.$.modal;
+
+                modal.style.display = "none";
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+
+        window.customElements.define(Modal.is, Modal);
+    </script>
+</dom-module>

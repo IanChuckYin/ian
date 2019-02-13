@@ -1,0 +1,158 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="ian-cards">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+
+      .card {
+        color: #F1F3F2;
+        background-color: transparent;
+      }
+
+      .card-text {
+        line-height: 40px;
+        padding-bottom: 150px;
+        font-size: 18px;
+        width: 50%;
+        display: inline-block;
+        margin-top: 100px;
+      }
+
+      .image-container {
+        text-align: center;
+        width: 50%;
+        display: inline-block;
+      }
+
+      .line {
+        width: 5%;
+        height: 2px;
+        background-color: #66FCF1;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* MOBILE CSS */
+
+      .m-card {
+        text-align: center;
+        color: #F1F3F2;
+        background-color: transparent;
+      }
+
+      .m-card-text {
+        line-height: 40px;
+        padding-bottom: 100px;
+        font-size: 14px;
+        width: 100%;
+      }
+
+      .m-image-container {
+        text-align: center;
+      }
+    </style>
+    <!-- DESKTOP VERSION -->
+    <template is="dom-if" if="{{wide}}">
+      <div class="card">
+        <template is="dom-repeat" items="{{text}}">
+          <template is="dom-if" if="{{_leftAlign(item.align)}}">
+            <div class="card-text hide" id="{{item.id}}">
+              <div class="line"></div>
+              {{item.content}}
+              <div class="line"></div>
+            </div>
+            <div class="image-container hide right" id="{{item.imageID}}">
+              <img src="{{path}}{{item.image}}">
+            </div>
+          </template>
+
+          <template is="dom-if" if="{{_rightAlign(item.align)}}">
+            <div class="image-container hide left" id="{{item.imageID}}">
+              <img src="{{path}}{{item.image}}">
+            </div>
+            <div class="card-text hide" id="{{item.id}}">
+              <div class="line"></div>
+              {{item.content}}
+              <div class="line"></div>
+            </div>
+          </template>
+        </template>
+      </div>
+    </template>
+
+    <!-- MOBILE VERSION -->
+    <template is="dom-if" if="{{!wide}}">
+      <div class="m-card">
+        <template is="dom-repeat" items="{{text}}">
+          <div class="m-image-container hide" id="{{item.imageID}}">
+            <img class="m-image" src="{{path}}{{item.mobile}}">
+          </div>
+          <div class="m-card-text hide" id="{{item.id}}">
+            <div class="line"></div>
+            {{item.content}}
+            <div class="line"></div>
+          </div>
+        </template>
+      </div>
+    </template>
+
+  </template>
+
+  <script>
+    class Card extends Polymer.Element {
+      static get is() { return 'ian-cards'; }
+      static get properties() {
+        return {
+          path: {
+            type: String,
+            value: "../../images/"
+          }
+        }
+      }
+
+      _rightAlign(align) {
+        return align == "right" ? true : false;
+      }
+
+      _leftAlign(align) {
+        return align == "left" ? true : false;
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      _resetCardComponents() {
+        var aboutMe = this.text;
+        var self = this;
+
+        aboutMe.forEach(function (about) {
+          // For paragraphs
+          var paragraphElement = self.shadowRoot.querySelector('#' + about.id);
+          paragraphElement.classList.remove(about.animation);
+          _hide(paragraphElement);
+
+          // For images
+          var imageElement = self.shadowRoot.querySelector('#' + about.imageID);
+          imageElement.classList.remove(about.imageAnimation);
+          _hide(imageElement);
+        });
+      }
+    }
+
+    window.customElements.define(Card.is, Card);
+  </script>
+</dom-module>

@@ -1,0 +1,412 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="page-config">
+    <template></template>
+    <script>
+        class Config extends Polymer.Element {
+            static get is() { return 'page-config'; }
+            static get properties() {
+                return {
+                    intro: {
+                        type: Array,
+                        value:
+                            {
+                                introTerminal: "~ curious-user$",
+                                introTypedCD: "cd ian-website/",
+                                introCD: "ian-website curious-user$",
+                                introTypedRun: "magic run",
+                                introExtra: [
+                                    "<p>Launch initialized...</p>",
+                                    "<p>Grabbing components...</p>",
+                                    "<p>Generating beautiful picture of Ian...</p>",
+                                    "<p>Initialization complete!</p>"
+                                ]
+                            }
+                    },
+                    pages: {
+                        type: Array,
+                        value: [
+                            {
+                                pageName: "Home",
+                                name: "home",
+                                path: "home"
+                            },
+                            {
+                                pageName: "Projects",
+                                name: "projects",
+                                path: "projects"
+                            },
+                            {
+                                pageName: "Resume",
+                                name: "resume",
+                                path: "resume"
+                            },
+                            {
+                                pageName: "Contact",
+                                name: "contact",
+                                path: "contact"
+                            }
+                        ]
+                    },
+                    content: {
+                        type: Array,
+                        value: {
+                            home: {
+                                pageName: {
+                                    content: ["ABOUT", "ME"],
+                                    animation: 'fade-in-move-right'
+                                },
+                                myName: "IAN CHUCK-YIN",
+                                occupation: "SOFTWARE DEVELOPER",
+                                education: ["Health Informatics", "Computer Science"],
+                                aboutMe: [
+                                    {
+                                        content: "I am a self taught software developer who graduated at the University of Waterloo. Although my official degree is a Bachelor of Science in Health Studies, my true passion was in the field of software. This led me to pursue a Health Informatics specialization and a minor in Computer Science, as well as enrolling in extra curricular computer science courses to further develop my skills.",
+                                        image: "profile_pic_website.png",
+                                        mobile: "profile_pic_website.png",
+                                        align: "left",
+                                        id: "first",
+                                        animation: "fade-in-move-up",
+                                        imageAnimation: "fade-in-move-left",
+                                        imageID: "imageone"
+                                    },
+                                    {
+                                        content: "After exposing myself to multiple programming languages, I was able to develop multiple web applications, as well as exploring the video game industry by developing games of my own. With this experience, I decided to pursue a career in software development",
+                                        image: "game-icon.png",
+                                        mobile: "game-icon-mobile.png",
+                                        align: "right",
+                                        id: "second",
+                                        animation: "fade-in-move-up",
+                                        imageAnimation: "fade-in-move-right",
+                                        imageID: "imagetwo"
+                                    },
+                                    {
+                                        content: "My work experience consists of different aspects of software such as mobile and web application development, database management, writing scripts, and implementing software technologies into the field of healthcare.",
+                                        image: "web-application-icon.png",
+                                        mobile: "web-application-icon-mobile.png",
+                                        align: "left",
+                                        id: "third",
+                                        animation: "fade-in-move-up",
+                                        imageAnimation: "fade-in-move-left",
+                                        imageID: "imagethree"
+                                    }
+                                ],
+                                skills: {
+                                    title: {
+                                        content: ["SKILL", "SET"],
+                                        animation: "fade-in-move-left"
+                                    },
+                                    content: [
+                                        {
+                                            language: "Google Polymer",
+                                            content: "Proficient in developing responsive web and mobile applications using the Polymer framework and building custom web components",
+                                            image: "polymer_logo.png",
+                                            id: "polymer",
+                                            animation: "fade-in-move-right"
+                                        },
+                                        {
+                                            language: "JavaScript",
+                                            content: "Able to develop dynamic web applications, as well as incorporating features such as charts, calendars, generating PDFs, and exporting data in Excel worksheets",
+                                            image: "js_logo.png",
+                                            id: "javascript",
+                                            animation: "fade-in-move-right"
+                                        },
+                                        {
+                                            language: "Java",
+                                            content: "Knowledgeable in object oriented programming and Java Swing. Experience in developing mobile applications using Android Studio",
+                                            image: "java_logo.png",
+                                            id: "java",
+                                            animation: "fade-in-move-right"
+                                        },
+                                        {
+                                            language: "C#/Unity 5",
+                                            content: "Experience in developing video games on mobile devices using the Unity 5 Engine",
+                                            image: "unity_logo.png",
+                                            id: "unity",
+                                            animation: "fade-in-move-right"
+                                        },
+                                        {
+                                            language: "Python",
+                                            content: "Proficient in writing data migration scripts, exporting data as Excel worksheets, and scripts for data manipulation.",
+                                            image: "python_logo.png",
+                                            id: "python",
+                                            animation: "fade-in-move-right"
+                                        },
+                                        {
+                                            language: "SQL",
+                                            content: "Able to write SQL statements for database management and querying.",
+                                            image: "sql_logo.png",
+                                            id: "sql",
+                                            animation: "fade-in-move-right"
+                                        }
+                                    ]
+                                }
+                            },
+                            projects: {
+                                pageName: {
+                                    content: ["PROJECTS"],
+                                    animation: "fade-in-move-up"
+                                },
+                                content: {
+                                    project: [
+                                        {
+                                            projectName: "Knights",
+                                            animation: "fade-in-expand",
+                                            url: "../unity/Knights_WebGL/index.html",
+                                            image: "../images/Splash_Screen.png",
+                                            id: "q"
+                                        },/*
+                                        {
+                                            projectName: "Test Game 2",
+                                            animation: "fade-in-expand",
+                                            id: "qq"
+                                        },
+                                        {
+                                            projectName: "Test Game 3",
+                                            animation: "fade-in-expand",
+                                            id: "qqq"
+                                        }*/
+                                    ]
+                                }
+                            },
+                            resume: {
+                                pdf: {
+                                    fileName: "IanChuckYinUpdated.pdf",
+                                    buttonText: "View and download PDF",
+                                    buttonIcon: "image:picture-as-pdf"
+                                },
+                                pageName: {
+                                    content: ["RESUME"],
+                                    animation: "fade-in-move-up"
+                                },
+                                education: {
+                                    title: {
+                                        content: "EDUCATION",
+                                        animation: "fade-in-move-left"
+                                    },
+                                    university: { content: "University of Waterloo", icon: "social:location-city" },
+                                    class: { content: "Class of 2018", icon: "social:school" },
+                                    location: { content: "Waterloo, Ontario", icon: "communication:location-on" },
+                                    degree: [
+                                        "BSc - Honours Health Studies",
+                                        "Specialization - Health Informatics",
+                                        "Minor - Computer Science"
+                                    ],
+                                    animation: "fade-in-move-right",
+                                    image: "waterloo-logo.png",
+                                    mobile: "waterloo-logo-mobile.png",
+                                    imageAnimation: "fade-in-move-left"
+                                },
+                                experience: {
+                                    title: {
+                                        content: "EXPERIENCE",
+                                        animation: "fade-in-move-left"
+                                    },
+                                    content: [
+                                    {
+                                            headerID: "uhn",
+                                            headerAnimation: "fade-in-move-right",
+                                            logo: {
+                                                image: "uhn-logo.png",
+                                                mobile: "uhn-logo-mobile.png",
+                                                animation: "fade-in-move-left",
+                                                id: "uhnimage"
+                                            },
+                                            company: "University Health Network",
+                                            role: "Software Engineer",
+                                            date: "September 2018 - Present",
+                                            details: {
+                                                content: [
+                                                    {
+                                                        bullet: "Create software solutions for a large, complex hospital environment",
+                                                        id: "x"
+                                                    },
+                                                    {
+                                                        bullet: "Web application developer, part of the UHN Clinical Web Application project within the Systems Engineering team",
+                                                        id: "xx"
+                                                    },
+                                                    {
+                                                        bullet: "Responsible for the development of web applications, databases, and services using Clojure, Clojurescript, Java, and SQL",
+                                                        id: "xxx"
+                                                    },
+                                                    {
+                                                        bullet: "Responsible for the full lifecycle of software delivery, from application design and implementation to maintenance and support including participation in on-call rotation with the other developers in the team",
+                                                        id: "xxxx"
+                                                    }
+                                                ],
+                                                animation: "fade-in-move-up"
+                                            }
+                                        },
+                                        {
+                                            headerID: "liquid",
+                                            headerAnimation: "fade-in-move-right",
+                                            logo: {
+                                                image: "la-icon.png",
+                                                mobile: "la-icon.png",
+                                                animation: "fade-in-move-left",
+                                                id: "liquidimage"
+                                            },
+                                            company: "Liquid Analytics",
+                                            role: "Software Engineer",
+                                            date: "January 2018 - September 2018",
+                                            details: {
+                                                content: [
+                                                    {
+                                                        bullet: "Designed and developed Liquid Analytics' main web application for viewing customer and employee data using the Google Polymer 2.0 framework",
+                                                        id: "y"
+                                                    },
+                                                    {
+                                                        bullet: "Use API calls to retrieve JSON formatted data from databases/Amazon Web Services and display it in a practical and intuitive user interface for web applications",
+                                                        id: "yy"
+                                                    },
+                                                    {
+                                                        bullet: "Built and maintained SQL scripts for data analysis and extraction for various projects",
+                                                        id: "yyy"
+                                                    },
+                                                    {
+                                                        bullet: "Develop Python scripts for data migration, modification and analysis using the pandas software library",
+                                                        id: "yyyy"
+                                                    },
+                                                    {
+                                                        bullet: "Write automated testing scripts for iOS and web applications",
+                                                        id: "yyyyy"
+                                                    },
+                                                    {
+                                                        bullet: "Proven ability to work under pressure in an agile environment to meet deadlines",
+                                                        id: "yyyyyy"
+                                                    }
+                                                ],
+                                                animation: "fade-in-move-up"
+                                            }
+                                        },
+                                        {
+                                            headerID: "waterloo",
+                                            headerAnimation: "fade-in-move-right",
+                                            logo: {
+                                                image: "uwai-logo.png",
+                                                mobile: "uwai-logo.png",
+                                                animation: "fade-in-move-left",
+                                                id: "waterlooimage"
+                                            },
+                                            company: "Univeristy of Waterloo",
+                                            role: "Mobile Application Developer",
+                                            date: "September 2017 - January 2018",
+                                            details: {
+                                                content: [
+                                                    {
+                                                        bullet: "Developed prototype of the University of Waterloo Academic Integrity (UWAI) mobile application",
+                                                        id: "z"
+                                                    },
+                                                    {
+                                                        bullet: "Designed the front end and back end aspects of the app using Unity 5 and C#",
+                                                        id: "zz"
+                                                    },
+                                                    {
+                                                        bullet: "Developed and integrated games into the UWAI app to enhance user experience, as well as develop the overall functionality of the app",
+                                                        id: "zzz"
+                                                    },
+                                                    {
+                                                        bullet: "Prepared presentations of the UWAI app which included screenshots and a walkthrough of the app",
+                                                        id: "zzzz"
+                                                    }
+                                                ],
+                                                animation: "fade-in-move-up"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            contact: {
+                                pageName: {
+                                    content: ["CONTACT"],
+                                    animation: "fade-in-move-down"
+                                },
+                                message: "If you are interested in getting to know me further, send me a message and I'll get back to you as soon as possible.",
+                                form: {
+                                    email: "ichuckyin@edu.uwaterloo.ca",
+                                    url: "https://formspree.io/",
+                                    button: {
+                                        icon: "icons:mail",
+                                        animation: "fade-in-move-left"
+                                    },
+                                    fields: [
+                                        {
+                                            type: "single",
+                                            label: "Name",
+                                            emailType: "name",
+                                            requiredMessage: "Please enter your name.",
+                                            id: "name",
+                                            icon: "social:person",
+                                            animation: "fade-in-move-up",
+                                            rowID: "namerow"
+                                        },
+                                        {
+                                            type: "single",
+                                            label: "Email Address",
+                                            emailType: "email",
+                                            requiredMessage: "Please enter your email address.",
+                                            id: "email",
+                                            icon: "communication:contact-mail",
+                                            animation: "fade-in-move-up",
+                                            rowID: "emailrow"
+
+                                        },
+                                        {
+                                            type: "single",
+                                            label: "Phone Number",
+                                            emailType: "tel",
+                                            requiredMessage: "Please enter your phone number.",
+                                            id: "phone",
+                                            icon: "communication:phone",
+                                            animation: "fade-in-move-up",
+                                            rowID: "phonerow"
+                                        },
+                                        {
+                                            type: "textbox",
+                                            label: "Message",
+                                            requiredMessage: "Please enter a message.",
+                                            id: "message",
+                                            icon: "communication:message",
+                                            animation: "fade-in-move-up",
+                                            rowID: "messagerow"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    footer: {
+                        type: Array,
+                        value: {
+                            myName: "IAN CHUCK-YIN",
+                            location: ["Mississauga, Ontario", "social:location-city"],
+                            email: ["ichuckyin@edu.uwaterloo.ca", "icons:mail",],
+                            phone: ["647-470-9115", "communication:phone"]
+                        }
+                    }
+                }
+            }
+
+            ready() {
+                super.ready();
+                this.dispatchEvent(new CustomEvent('intro', { detail: this.intro }));
+                this.dispatchEvent(new CustomEvent('config', { detail: this.pages }));
+                this.dispatchEvent(new CustomEvent('content', { detail: this.content }));
+                this.dispatchEvent(new CustomEvent('footer', { detail: this.footer }));
+            }
+        }
+
+        window.customElements.define(Config.is, Config);
+    </script>
+</dom-module>

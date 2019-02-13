@@ -1,195 +1,112 @@
-<!DOCTYPE html>
-<html class="no-js">
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Ian Chuck-Yin">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
     <title>Ian Chuck-Yin</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+    <meta name="description" content="Ian's website">
+
+    <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+
+      Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
+    -->
+    <base href="/">
+
+    <link rel="icon" href="images/ian_logo.png">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="My App">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#3f51b5">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script>
+      /**
+      * [polymer-root-path]
+      *
+      * By default, we set `Polymer.rootPath` to the server root path (`/`).
+      * Leave this line unchanged if you intend to serve your app from the root
+      * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+      *
+      * If you intend to serve your app from a non-root path (e.g., with URLs
+      * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+      * to indicate the path from which you'll be serving, including leading
+      * and trailing slashes (e.g., `/my-app/`).
+      */
+      window.Polymer = {rootPath: '/'};
+
+      // Load and register pre-caching Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js', {
+            scope: Polymer.rootPath,
+          });
+        });
+      }
+    </script>
+
+    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- Load your application shell -->
+    <link rel="import" href="src/ian-app.html">
+
+    <!-- Add any global styles for body, document, etc. -->
+    <style>
+      body {  
+        margin: 0;
+        font-family: Courier New, Courier, monospace;
+        line-height: 1.5;
+        min-height: 100vh;
+        background-color: #272424;
+      }
+    </style>
   </head>
-  <body onload="typeAnimateName()">
-    <!-- Header Start -->
-  <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- header Nav Start -->
-          <nav class="navbar navbar-default">
-            <div class="container-fluid">
-
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                  <img class="logo" src="img/ian_logo.png" alt="Logo">
-                </a>
-              </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="work.html">Projects</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                  </ul>
-                </div><!-- /.navbar-collapse -->
-              </div><!-- /.container-fluid -->
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header><!-- header close -->
-        
-    <!-- Slider Start -->
-    <section id="slider">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="block">
-              <h1 class="animated fadeInUp" id="name-title"></h1>
-              <h4 class="animated fadeInUp">
-                <br>HEALTH INFORMATICS
-                <br>COMPUTER SCIENCE
-              </h4>
-              <p class="animated fadeInUp">Software Developer</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Wrapper Start -->
-    <section id="intro">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-7 col-sm-12">
-            <div class="block">
-              <div class="section-title">
-                <h2>ABOUT ME</h2>
-              </div>
-              <p>
-                I am an undergraduate student at the <a href="https://uwaterloo.ca/">University of Waterloo</a> with a major in Health Studies, a Health Informatics Specialization, and a Computer Science Minor. With the exponential growth of technology usage and advancement in our society, my goal is to implement technology into health care. My passion involves Web Development and developing mobile applications.
-                <br>
-                <br>
-                I was born and raised in Mississauga and eventually enrolled into the Health Studies program at the University of Waterloo. At first I did not know what to pursue and so I challenged myself to prepare for the MCAT and eventually apply for medical school. However, that all changed when I took a health informatics course and realized the massive potential of technology usage in the field of health care. I eagerly wanted to learn programming languages and mobile application development. I began to teach myself programming languages such as Google Polymer, Java, Python, HTML/CSS/JavaScript, and Unity 5/C# while learning programs such as SAS, SPSS, SQL, and more Python at the University of Waterloo. Since then, I have been working on web pages (such as this one) and other projects to advance my skills as a full stack developer.
-              </p>
-            </div>
-          </div><!-- .col-md-7 close -->
-          <div class="col-md-4 col-sm-12">
-            <div class="block">
-              <img src="img/profile_pic_website.png" alt="Img">
-            </div>
-          </div><!-- .col-md-5 close -->
-        </div>
-      </div>
-    </section>
-
-  <section id="feature">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-7">
-          <h2>PROJECTS</h2>
-          <p>While learning multiple computer languages, I have developed my own applications mainly using Java, C#, and Unity 5. All projects are developed, designed, and coded by me.</p>
-          <a href="work.html" class="btn btn-view-works">View Projects</a>
-        </div>
-      </div>
-    </div>
-  </section>
-        
-    <!-- Service Start -->
-    <section id="service">
-      <div class="container">
-        <div class="row">
-          <div class="section-title">
-            <h2>SKILL SET</h2>
-          </div>
-        </div>
-        <div class="row ">
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/polymer_logo.png" class="skill-icon"></img>
-              <h4>Polymer</h4>
-              <p>Profficient in developing responsive web applications using the Polymer framework.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/js_logo.png" class="skill-icon"></img>
-              <h4>JavaScript</h4>
-              <p>Able to create custom functions to make web page interactive with the user.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/java_logo.jpg" class="skill-icon"></img>
-              <h4>Java/Android Studio</h4>
-              <p>Knowlegable in object oriented programming and Java Swing. Experienced in Android Studio.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/unity_logo.png" class="skill-icon"></img>
-              <h4>C#/Unity 5</h4>
-              <p>Able to use C# scripting to develop mobile apps using the Unity 5 engine.</p>
-            </div>
-          </div>
-<!--          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/c++_logo.png" class="skill-icon"></img>
-              <h4>C++</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
-            </div>
-          </div>-->
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/python_logo.jpg" class="skill-icon"></img>
-              <h4>Python</h4>
-              <p>Proficient in all aspects of Python including data structures and algorithms.</p>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4">
-            <div class="service-item">
-              <img src="img/linux_logo.jpg" class="skill-icon"></img>
-              <h4>DBMS and Linux</h4>
-              <p>Able to use SQL for database querying. Also experienced in Linux programming.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- footer Start -->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="footer-manu">
-              <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="work.html">Projects</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-            <p>Copyright &copy; Ian Chuck-Yin</p>
-            <p>Last Updated: December 18, 2017</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-            
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/my_functions.js"></script>
+  <body>
+    <my-app></my-app>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
+    <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>
