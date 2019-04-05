@@ -5,79 +5,148 @@
     <template>
         <style include="shared-styles">
             :host {
-                display: inline-block;
-                text-align: center;
-                width: 100%;
-                min-width: 300px;
-            }
-
-            @media only screen and (min-width: 768px) {
-                :host {
-                    display: inline-block;
-                    text-align: center;
-                    width: 32%;
-                    min-width: 300px;
-                    margin: 10px 5px 50px 5px;
-                }
-            }
-
-            a {
-                text-decoration: none;
+                display: block;
             }
 
             .card {
-                color: #F1F3F2;
-                height: 300px;
                 width: 100%;
-                padding-bottom: 100px;
+                height: 100%;
+                float: left;
             }
 
-            .project-name {
+            .m-container {
+                width: 100%;
+                font-size: 16px;
+                color: #66FCF1;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            .container {
+                width: 50%;
+                font-size: 16px;
+                color: #66FCF1;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            .project-header {
+                font-size: 26px;
+            }
+
+            .project-text {
+                text-align: left;
+            }
+
+            .project-details {
+                font-size: 20px;
+            }
+
+            .project-features {
+                color: #F1F3F2;
+            }
+
+            .features-text {
                 color: #66FCF1;
             }
 
-            .project-box {
-                width: 100%;
-                height: 100%;
-                background-color: #F1F3F2;
-                border: 1px solid #66FCF1;
-            }
-
-            .card-text {
-                line-height: 40px;
-                padding-bottom: 250px;
-                font-size: 18px;
-            }
-
-            .image-container {
-                text-align: center;
-            }
-
-            .line {
-                width: 5%;
-                height: 2px;
-                background-color: #66FCF1;
-                display: inline-block;
-                vertical-align: middle;
+            br {
+                clear: both;
             }
 
             img {
                 width: 100%;
                 height: 100%;
+                border: 1px solid #66FCF1;
+            }
+
+            p {
+                margin: 5px 0px;
+            }
+
+            paper-button {
+                color: #272424;
+                border: 1px solid #272424;
+                background-color: #F1F3F2;
+                width: 100%;
+            }
+
+            paper-button:hover {
+                color: #66FCF1;
+                border: 1px solid #66FCF1;
+                background-color: #272424;
             }
         </style>
-        <div class="card">
-            <a href="{{project.url}}" target="_blank">
-                <div class="project-name">
-                    <div class="line"></div>
-                    {{project.projectName}}
-                    <div class="line"></div>
-                </div>
-                <div class="project-box">
+
+        <!-- DESKTOP VERSION -->
+        <template is="dom-if" if="{{wide}}">
+            <div class="card">
+                <div class="container left">
                     <img src="{{project.image}}">
                 </div>
-            </a>
-        </div>
+                <div class="container right">
+                    <div class="project-header">
+                        - {{project.name}} -
+                    </div>
+                    <div class="project-text">
+                        <div class="project-details">
+                            <p>{{project.releaseDate}}</p>
+                            <p>{{project.language}}</p>
+                        </div>
+                        <div class="project-features">
+                            <p>{{project.description}}</p>
+                            <p class="features-text">Features: </p>
+                            <template is="dom-repeat" items="{{project.features}}">
+                                <p>- {{item}}</p>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a href="{{project.url}}" target="_blank">
+                            <paper-button>
+                                {{project.demoText}}
+                            </paper-button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </template>
+
+        <!-- MOBILE VERSION -->
+        <template is="dom-if" if="{{!wide}}">
+            <div class="card">
+                <div class="m-container">
+                    <img src="{{project.image}}">
+                </div>
+                <div class="m-container">
+                    <div class="project-header">
+                        - {{project.name}} -
+                    </div>
+                    <div class="project-text">
+                        <div class="project-details">
+                            <p>{{project.releaseDate}}</p>
+                            <p>{{project.language}}</p>
+                        </div>
+                        <div class="project-features">
+                            <p>{{project.description}}</p>
+                            <p class="features-text">Features: </p>
+                            <template is="dom-repeat" items="{{project.features}}">
+                                <p>- {{item}}</p>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a href="{{project.url}}" target="_blank">
+                            <paper-button>
+                                {{project.demoText}}
+                            </paper-button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </template>
     </template>
 
     <script>
