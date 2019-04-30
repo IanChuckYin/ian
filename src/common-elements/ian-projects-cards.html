@@ -68,7 +68,7 @@
                 color: #272424;
                 border: 1px solid #272424;
                 background-color: #F1F3F2;
-                width: 100%;
+                width: 45%;
             }
 
             paper-button:hover {
@@ -107,6 +107,11 @@
                                 {{project.demoText}}
                             </paper-button>
                         </a>
+                        <a href="{{project.codeBase}}" target="_blank">
+                            <paper-button>
+                                View Code
+                            </paper-button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -140,6 +145,11 @@
                         <a href="{{project.url}}" target="_blank">
                             <paper-button>
                                 {{project.demoText}}
+                            </paper-button>
+                        </a>
+                        <a href="{{project.codeBase}}" target="_blank">
+                            <paper-button>
+                                View Code
                             </paper-button>
                         </a>
                     </div>
