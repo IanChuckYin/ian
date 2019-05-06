@@ -1,0 +1,334 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="markov-chain">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .content-container {
+        padding: 50px;
+        text-align: center;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 22px;
+      }
+
+      .tweet-container {
+        border: 1px solid black;
+        text-align: left;
+        padding: 30px 40px;
+        border-radius: 8px;
+        min-width: 640px;
+        max-width: 640px;
+        margin: auto;
+      }
+
+      .tweet-container p {
+        margin: 0;
+      }
+
+      .tweet-container .tweet-header {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-bottom: 15px;
+      }
+
+      .tweet-container .sticky-header {
+        flex: 1;
+      }
+
+      .tweet-container .user-avatar {
+        margin-top: 0;
+        float: left;
+        margin-right: 10px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+
+      .tweet-container .user-name {
+        display: flex;
+        color: #14171a;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: bold;
+        max-width: 32ch;
+      }
+
+      .tweet-container .twitter-name {
+        color: #657786;
+        font-size: 14px;
+      }
+
+      .tweet-container .follow-button {
+        width: 105px;
+        text-align: center;
+        border-color: #1B95E0;
+        color: #1B95E0;
+        background-color: white;
+        font-size: 14px;
+        border-radius: 100px;
+        height: 36px;
+        font-weight: bold;
+        outline: none;
+      }
+
+      .tweet-container .follow-button:hover {
+        cursor: pointer;
+      }
+
+      .tweet-container .tweet-action {
+        margin-left: 10px;
+      }
+
+      .tweet-container .tweet-text {
+        font-size: 27px;
+        line-height: 32px;
+        letter-spacing: 0.01em;
+      }
+
+      .button-container {
+        text-align: center;
+      }
+
+      .extra-container {
+        margin-top: 10px;
+      }
+
+      .extra-container .timestamp {
+        font-size: 14px;
+        color: #657786;
+      }
+
+      .extra-container .status-footer {
+        color: #657786;
+        font-size: 16px;
+        padding: 0px 2px;
+        border-top: 1px solid #e6ecf0;
+        margin-top: 10px;
+      }
+
+      .extra-container .status-footer .footer-item {
+        min-width: 80px;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .project-description {
+        text-align: left;
+        font-size: 16px;
+      }
+
+      paper-button {
+        border: 1px solid black;
+        margin: 10px;
+        height: 60px;
+        border-color: #1B95E0;
+        color: #1B95E0;
+        font-weight: bold;
+      }
+
+      paper-button:hover {
+        background-color: #e6ecf0;
+      }
+    </style>
+    <div class="content-container">
+      <p class="title">{{pageTitle}}</p>
+      <hr>
+      <div class="button-container">
+        <paper-button on-click="_generateTweet">
+          {{buttonText}}
+        </paper-button>
+      </div>
+
+      <!-- Tweet Container -->
+      <div class="tweet-container">
+        <div class="tweet-header">
+          <div class="sticky-header">
+            <img src="{{tweetInfo.userImage}}" class="user-avatar">
+            <span class="user-name">{{tweetInfo.userName}}</span>
+            <span class="twitter-name">{{tweetInfo.userTwitterName}}</span>
+          </div>
+          <button class="follow-button">Follow</button>
+          <div class="tweet-action">
+            <iron-icon icon="icons:expand-more"></iron-icon>
+          </div>
+        </div>
+        <p class="tweet-text">{{tweetInfo.currentTweet}}</p>
+        <div class="extra-container">
+          <p class="timestamp">{{tweetInfo.timeStamp}}</p>
+          <div class="status-footer">
+            <template is="dom-repeat" items="{{tweetInfo.footerInfo}}">
+              <div class="footer-item">
+                <iron-icon icon="{{item.item.icon}}"></iron-icon>
+                {{item.item.number}}
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Description -->
+      <div class="project-description">
+        <img src="">
+        <p class="title">{{projectDescription.title}}</p>
+        <p class="subtitle">{{projectDescription.subTitle}}</p>
+        <template is="dom-repeat" items="{{projectDescription.content}}">
+          <p>{{item}}</p>
+        </template>
+        <p>The code can be found on my GitHub <a href="https://github.com/IanChuckYin/trump_tweet_generator">here.</a></p>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class MarkovChain extends Polymer.Element {
+      static get is() { return 'markov-chain'; }
+      static get properties() {
+        return {
+          pageTitle: {
+            value: "Trump Tweet Generator by Ian Chuck-Yin"
+          },
+          markovChainBody: {
+            value: {}
+          },
+          markovStartingWords: {
+            value: {}
+          },
+          markovStopWords: {
+            value: {}
+          },
+          buttonText: {
+            value: "Generate Fake Tweet!"
+          },
+          tweetInfo: {
+            value: {
+              userImage: 'trump_pic.jpg',
+              userName: 'Donald J. Trump',
+              userTwitterName: '@realDonaldTrump',
+              currentTweet: '',
+              timeStamp: '',
+              footerInfo: [
+                { item: { icon: "communication:chat-bubble-outline", number: "0" } },
+                { item: { icon: "av:repeat", number: "0" } },
+                { item: { icon: "icons:favorite-border", number: "0" } }]
+            }
+          },
+          projectDescription: {
+            value: {
+              title: "Tweet Generator Using Markov Chains",
+              subTitle: "Languages used: Python, JavaScript",
+              content:
+                ["This project uses the Twitter API to stream tweets of US President Donald Trump, through oauth2 authentication. A Python script is run to authenticate and stream tweets from Jan 1, 2016 through Jan 1, 2019 in batches of 100 tweets. These tweets are then compiled into a text document.",
+
+                  "A second Python script is then used to read this compilation of tweets where the data is cleaned before being processed into a Markov Chain. The Markov Chain is built by tokenizing each tweet and determining the probabilities of each subsequent word appearing in the generated text, until the algorithm hits a 'stop' word. The Markov Chain is then exported in a JSON file and is read by a JavaScript file to display results in the browser.",
+
+                  "The current Markov Chain is built by a collection of 1136 tweets."]
+            }
+          }
+        }
+      }
+
+      ready() {
+        super.ready();
+        this._loadMarkovChain();
+      }
+
+      _loadMarkovChain() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "markov_chain.json", false);
+        request.send(null)
+        var markov_chain = JSON.parse(request.responseText);
+
+        this.set('markovChainBody', markov_chain.body);
+        this.set('markovStartingWords', markov_chain.starting_words);
+        this.set('markovStopWords', markov_chain.stop_words);
+
+        this._generateTweet();
+      }
+
+      _generateTweet() {
+        var generatedText = "";
+        var generating = true;
+        var randomIndex = this._getRandomNumberBetween(0, this.markovStartingWords.length - 1);
+
+        var word = this.markovStartingWords[randomIndex];
+
+        generatedText += word;
+
+        while (generating) {
+          randomIndex = this._getRandomNumberBetween(0, this.markovChainBody[word].length - 1);
+          var nextWord = this.markovChainBody[word][randomIndex];
+
+          generatedText += " " + nextWord;
+          word = nextWord;
+          
+          if ((this.markovStopWords.indexOf(nextWord[nextWord.length - 1]) >= 0 || nextWord.length == 0) && nextWord != "J.") {
+            generating = false;
+          }
+        }
+
+        this.set('tweetInfo.currentTweet', generatedText);
+
+        this._generateRandomExtraInfo();
+      }
+
+      _getRandomNumberBetween(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      _generateRandomExtraInfo() {
+        var currentDate = this._generateCurrentTimeStamp();
+        var numOfComments = this._getRandomNumberBetween(15, 35) + "K";
+        var numOfRetweets = this._getRandomNumberBetween(20, 45) + "K";
+        var numOfLikes = this._getRandomNumberBetween(100, 230) + "K";
+
+        this.set('tweetInfo.timeStamp', currentDate);
+        this.set('tweetInfo.footerInfo.0.item.number', numOfComments);
+        this.set('tweetInfo.footerInfo.1.item.number', numOfRetweets);
+        this.set('tweetInfo.footerInfo.2.item.number', numOfLikes);
+      }
+
+      _generateCurrentTimeStamp() {
+        var dates = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth();
+        var year = today.getFullYear();
+
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        var ampm = '';
+        
+        if (hours > 12) {
+          hours -= 12;
+          ampm = 'PM';
+        }
+        else {
+          hours = hours == 0 ? 12 : hours;
+          ampm = 'AM';
+        }
+
+        var finalDate = hours + ":" + minutes + " " + ampm + " - " + day + " " + dates[month] + " " + year;
+        return finalDate;
+      }
+    }
+
+    window.customElements.define(MarkovChain.is, MarkovChain);
+  </script>
+</dom-module>

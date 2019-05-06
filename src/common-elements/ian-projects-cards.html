@@ -12,6 +12,7 @@
                 width: 100%;
                 height: 100%;
                 float: left;
+                margin: 15px 0px;
             }
 
             .m-container {
@@ -23,11 +24,16 @@
             }
 
             .container {
-                width: 50%;
+                width: 75%;
                 font-size: 16px;
                 color: #66FCF1;
                 box-sizing: border-box;
                 padding: 5px;
+            }
+
+            .image-container {
+                width: 25%;
+                margin-top: 25px;
             }
 
             .project-header {
@@ -55,8 +61,8 @@
             }
 
             img {
-                width: 100%;
-                height: 100%;
+                width: 250px;
+                height: 250px;
                 border: 1px solid #66FCF1;
             }
 
@@ -82,9 +88,6 @@
         <template is="dom-if" if="{{wide}}">
             <div class="card">
                 <div class="container left">
-                    <img src="{{project.image}}">
-                </div>
-                <div class="container right">
                     <div class="project-header">
                         - {{project.name}} -
                     </div>
@@ -113,6 +116,9 @@
                             </paper-button>
                         </a>
                     </div>
+                </div>
+                <div class="image-container right">
+                    <img src="{{project.image}}">
                 </div>
             </div>
             <br>
