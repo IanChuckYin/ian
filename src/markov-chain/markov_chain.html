@@ -324,6 +324,10 @@
           ampm = 'AM';
         }
 
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+
         var finalDate = hours + ":" + minutes + " " + ampm + " - " + day + " " + dates[month] + " " + year;
         return finalDate;
       }
