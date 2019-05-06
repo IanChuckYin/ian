@@ -19,7 +19,7 @@ function _checkIfInView(element, animation, origianlProperty, autoEditCSS) {
     var screenViewBottom = screenViewTop + $(window).height();
 
     var elementTop = $(element).offset().top;
-    var elementBottom = elementTop + $(element).height();
+    var elementBottom = elementTop + $(element).height() - 150;
 
     var inView = ((elementBottom <= screenViewBottom) && (elementTop >= screenViewTop));
 
