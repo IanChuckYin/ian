@@ -7,6 +7,7 @@ import ContentContainer from '../ContentContainer/ContentContainer';
 import PanelContent from '../PanelContent/PanelContent';
 import Grid from '../Grid/Grid';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
+import { routeToNewTabHashed, routeToNewTab } from '../../util/RouteUtil';
 
 // Images
 import unityLogo from '../../images/unity_logo.png';
@@ -32,12 +33,12 @@ class Projects extends Component {
                     {
                         label: "DEMO",
                         url: '/tweet_generator',
-                        onClickEvent: this._onButtonClick.bind(this)
+                        onClickEvent: this._routeToNewTabHashed.bind(this)
                     },
                     {
                         label: "VIEW CODE",
                         url: 'https://github.com/IanChuckYin/trump_tweet_generator',
-                        onClickEvent: this._onButtonClick.bind(this)
+                        onClickEvent: this._routeToNewTab.bind(this)
                     }
                 ]
             },
@@ -58,12 +59,12 @@ class Projects extends Component {
                     {
                         label: "DEMO",
                         url: '/knights',
-                        onClickEvent: this._onButtonClick.bind(this)
+                        onClickEvent: this._routeToNewTabHashed.bind(this)
                     },
                     {
                         label: "VIEW CODE",
                         url: 'https://github.com/IanChuckYin/knights-game',
-                        onClickEvent: this._onButtonClick.bind(this)
+                        onClickEvent: this._routeToNewTab.bind(this)
                     }
                 ]
             },
@@ -83,16 +84,19 @@ class Projects extends Component {
                     {
                         label: "VIEW CODE",
                         url: 'https://github.com/IanChuckYin/youtube-scraper',
-                        onClickEvent: this._onButtonClick.bind(this)
+                        onClickEvent: this._routeToNewTab.bind(this)
                     }
                 ]
             }
         ]
     }
 
-    _onButtonClick(panelButton) {
-        const hashedRoute = process.env.PUBLIC_URL + '/#';
-        window.open(hashedRoute + panelButton.url);
+    _routeToNewTabHashed(panelButton) {
+        routeToNewTabHashed(panelButton.url);
+    }
+
+    _routeToNewTab(panelButton) {
+        routeToNewTab(panelButton.url);
     }
 
     render() {
