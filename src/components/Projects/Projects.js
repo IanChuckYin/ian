@@ -91,6 +91,7 @@ class Projects extends Component {
     }
 
     _onButtonClick(panelButton) {
+        console.log(process.env.PUBLIC_URL);
         window.open(process.env.PUBLIC_URL + panelButton.url);
     }
 
