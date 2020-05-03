@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import styles from './App.module.scss';
-import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 
-import Layout from '../Layout/Layout';
 import Home from '../Home/Home';
 import Knights from '../Knights/Knights';
 import MarkovProject from '../MarkovProject/MarkovProject';
+import Router from '../Router/Router';
 
+/**
+ * The root of our App
+ */
 class App extends Component {
   state = {
     routes: [
@@ -27,21 +29,10 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
-    const publicUrl = process.env.PUBLIC_URL;
-    const renderedRoutes = (
-      <HashRouter basename={publicUrl}>
-        <Switch>
-          {routes.map((route, index) => <Route key={index} exact path={route.path} component={route.component} />)}
-          <Redirect to={publicUrl} />
-        </Switch>
-      </HashRouter>
-    );
 
     return (
       <div className={styles.App}>
-        <Layout>
-          {renderedRoutes}
-        </Layout>
+        <Router routes={routes} isHash={true} />
       </div>
     );
   }

@@ -2,26 +2,35 @@ import React, { Component } from 'react';
 import styles from './Toolbar.module.scss';
 
 import Toolbarbutton from '../ToolbarButton/ToolbarButton';
-import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
-import selectors from '../../util/Selectors';
+import WithAnimation from '../../../hoc/WithAnimation/WithAnimation';
+import selectors from '../../../util/Selectors';
 import {
     isElementVerticallyIntersectingWith,
     getMostPrevalentElement,
-    rgb2hex,
-    getReverseRGB
-} from '../../util/DomUtil';
+    rgb2hex
+} from '../../../util/DomUtil';
 
+const ANIMATION_OPTIONS = {
+    animation: 'right',
+    type: 'onload'
+}
+
+/**
+ * Our single page application Toolbar component that does not route to different links.
+ * Rather, it scrolls to the component in our SPA 
+ */
 class Toolbar extends Component {
     state = {
-        renderedButtons: null,
-        domElements: null,
+        domPages: [],
+        rgbMap: {},
         selectedButton: null
     }
 
     // Lifecycle hook when component is mounted
     componentDidMount() {
+        this._setDomPages();
+        this._setReverseRGBMap();
         this._addScrollListener();
-        this._renderToolbarButtons();
     }
 
     // Lifecycle hook when component is unmounted
@@ -45,15 +54,30 @@ class Toolbar extends Component {
         this._updateSelectedButton();
     }
 
-    _updateToolbarStyle() {
-        const domToolbarButtons = document.getElementsByClassName(selectors.TOOLBAR_BUTTON);
-        const { toolbarItems } = this.props;
-        const domPages = toolbarItems.map(item => document.getElementById(item.props.id));
-        const pageElementMap = {};
+    _setDomPages() {
+        const { items } = this.props;
+        const domPages = items.map(item => document.getElementById(item.props.id));
+        this.setState({ domPages: domPages });
+    }
 
+    _setReverseRGBMap() {
+        const rgbMap = {};
+        rgbMap[styles.color4] = styles.color3;
+        rgbMap[styles.color3] = styles.color4;
+        this.setState({ rgbMap: rgbMap });
+    }
+
+    /**
+     * Returns an Object that maps colors to an array of DOM elements that have that color as their background
+     * @returns {Object}
+     */
+    _getPageElementMap() {
+        const { domPages } = this.state;
+        const domToolbarButtons = document.getElementsByClassName(selectors.TOOLBAR_BUTTON);
+        const pageElementMap = {};
         // Create a map of all pages, and which toolbar buttons are intersecting them
         domPages.forEach((page) => {
-            const currentBackgroundColor = rgb2hex(window.getComputedStyle(page).getPropertyValue("background-color"));
+            const currentBackgroundColor = rgb2hex(window.getComputedStyle(page).getPropertyValue('background-color'));
             Array.from(domToolbarButtons).forEach((button) => {
                 if (isElementVerticallyIntersectingWith(button, page)) {
                     if (pageElementMap[currentBackgroundColor]) {
@@ -64,19 +88,26 @@ class Toolbar extends Component {
                 }
             });
         });
+        return pageElementMap;
+    }
+
+    // Updates the colors of our toolbar buttons according to the pageElementMap
+    _updateToolbarStyle() {
+        const { rgbMap } = this.state;
+        const pageElementMap = this._getPageElementMap();
+
         Object.keys(pageElementMap).forEach((colorKey) => {
             pageElementMap[colorKey].forEach(element => {
                 const buttonBorder = element.getElementsByClassName(selectors.TOOLBAR_BUTTON_BORDER)[0];
-                buttonBorder.style.borderColor = getReverseRGB(colorKey);
-                element.style.color = getReverseRGB(colorKey);
+                buttonBorder.style.borderColor = rgbMap[colorKey];
+                element.style.color = rgbMap[colorKey];
             });
         });
     }
 
     // Update the selected button based on what's currently in the viewport
     _updateSelectedButton() {
-        const { toolbarItems } = this.props;
-        const domPages = toolbarItems.map(item => document.getElementById(item.props.id));
+        const { domPages } = this.state;
         const mostPrevalentPage = getMostPrevalentElement(domPages);
         this.setState({ selectedButton: mostPrevalentPage.id });
     }
@@ -91,8 +122,9 @@ class Toolbar extends Component {
 
     // General toolbar button click
     _onButtonClick(item) {
-        const reactElementID = item.props.id;
-        this._scrollIntoView(document.getElementById(reactElementID));
+        const { id } = item.props;
+        const domElement = document.getElementById(id);
+        this._scrollIntoView(domElement);
     }
 
     /**
@@ -103,16 +135,16 @@ class Toolbar extends Component {
         domElement.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Render the toolbar components and store them
+    // Render the toolbar components
     _renderToolbarButtons() {
-        const { toolbarItems } = this.props;
-        const renderedButtons = toolbarItems.map((item, index) => {
-            const pageTitle = item.props.title;
+        const { items } = this.props;
+        const renderedButtons = items.map((item, index) => {
+            const { title, id } = item.props;
             return (
                 <Toolbarbutton
                     key={index}
-                    selected={this._isButtonSelected(item.props.id)}
-                    buttonLabel={pageTitle}
+                    selected={this._isButtonSelected(id)}
+                    buttonLabel={title}
                     onClick={() => this._onButtonClick(item)}
                 />
             );
@@ -122,7 +154,10 @@ class Toolbar extends Component {
 
     render() {
         return (
-            <WithAnimation className={styles.Toolbar} animation='right' type='onload'>
+            <WithAnimation
+                className={styles.Toolbar}
+                animation={ANIMATION_OPTIONS.animation}
+                type={ANIMATION_OPTIONS.type}>
                 {this._renderToolbarButtons()}
             </WithAnimation>
         );

@@ -1,10 +1,10 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 $large-panel-size: 400px;
 $small-panel-size: 300px;
 $container-padding: 15px 30px;
 
-.FeaturePanel {
+.ProjectPanel {
     position: relative;
     border: 2px solid $color-2;
     box-sizing: border-box;
@@ -22,15 +22,15 @@ $container-padding: 15px 30px;
     height: $small-panel-size;
 }
 
-.FeaturePanel:hover .ContentContainer{
+.ProjectPanel:hover .ContentContainer{
     opacity: 1;
 }
 
-.FeaturePanel:hover .ImageContainer {
+.ProjectPanel:hover .ImageContainer {
     opacity: 0.1;
 }
 
-.FeaturePanel:hover {
+.ProjectPanel:hover {
     border: 2px solid $color-1;
     transform: scale(1.03);
 }
@@ -71,10 +71,6 @@ $container-padding: 15px 30px;
 }
 
 .ButtonContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
     width: 100%;
     padding: $container-padding;
-    box-sizing: border-box;
 }

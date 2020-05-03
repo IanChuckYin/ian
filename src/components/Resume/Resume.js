@@ -3,10 +3,10 @@ import styles from './Resume.module.scss';
 
 import PageTitle from '../PageTitle/PageTitle';
 import Timeline from '../Timeline/Timeline';
+import TimelineContainer from '../Timeline/TimelineContainer/TimelineContainer';
 import ExperiencePanel from '../ExperiencePanel/ExperiencePanel';
 import EducationPanel from '../EducationPanel/EducationPanel';
 import ContentContainer from '../ContentContainer/ContentContainer';
-import TimelineContainer from '../TimelineContainer/TimelineContainer';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
 
 // Logos
@@ -71,7 +71,7 @@ class Resume extends Component {
                     logo: uhnLogo,
                     image: uhnImage,
                     content: [
-                        "Web application developor, part of the UHN Clinical Web Application project within the Systems Engineering team",
+                        "Web application developer, part of the UHN Clinical Web Application project within the Systems Engineering team",
                         "Responsible for the full life cycle of software delivery including design, implmentation, testing and maintenance of Clojure web applications, databases, and web services",
                         "Lead development of the Clinical Portal application using Clojure and ClojureScript allowing clinicians centralized access to patient data",
                         "Implement server-side services using Java and PostgreSQL",
@@ -106,11 +106,35 @@ class Resume extends Component {
         }
     }
 
-    render() {
-        const { title, id } = this.props;
-        const { education, experience } = this.state;
+    _renderEducationContainer() {
+        const { education } = this.state;
+        const { educationInfo, logo, image, label } = education;
+        const educationPanels = educationInfo.map((edu, index) => {
+            const { university, location, graduationDate, credentials } = edu;
+            return (
+                <EducationPanel
+                    key={index}
+                    iconItems={[university, location, graduationDate]}
+                    content={credentials}
+                    logo={logo}
+                    image={image}
+                />
+            );
+        });
 
-        const experiencePanels = experience.workExperience.map((exp, index) => {
+        const educationContainer = (
+            <TimelineContainer header={label}>
+                {educationPanels}
+            </TimelineContainer>
+        );
+
+        return educationContainer;
+    }
+
+    _renderExperienceContainer() {
+        const { experience } = this.state;
+        const { workExperience, label } = experience;
+        const experiencePanels = workExperience.map((exp, index) => {
             const { companyName, positionName, dateRange, content, logo, image } = exp;
             return (
                 <ExperiencePanel
@@ -125,29 +149,17 @@ class Resume extends Component {
             );
         });
 
-        const educationPanels = education.educationInfo.map((edu, index) => {
-            return (
-                <EducationPanel
-                    key={index}
-                    iconItems={[edu.university, edu.location, edu.graduationDate]}
-                    content={edu.credentials}
-                    logo={education.logo}
-                    image={education.image}
-                />
-            );
-        });
-
-        const educationContainer = (
-            <TimelineContainer header={education.label}>
-                {educationPanels}
-            </TimelineContainer>
-        );
-
         const experienceContainer = (
-            <TimelineContainer header={experience.label}>
+            <TimelineContainer header={label}>
                 {experiencePanels}
             </TimelineContainer>
         );
+
+        return experienceContainer;
+    }
+
+    render() {
+        const { title, id } = this.props;
 
         return (
             <div className={styles.Resume} id={id}>
@@ -155,8 +167,8 @@ class Resume extends Component {
                 <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
                         <Timeline>
-                            {educationContainer}
-                            {experienceContainer}
+                            {this._renderEducationContainer()}
+                            {this._renderExperienceContainer()}
                         </Timeline>
                     </ContentContainer>
                 </WithAnimation>

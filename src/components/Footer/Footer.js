@@ -4,6 +4,11 @@ import styles from './Footer.module.scss';
 import SplitContainer from '../SplitContainer/SplitContainer';
 import WithTypeAnimation from '../../hoc/WithTypeAnimation/WithTypeAnimation';
 
+const TYPE_ANIMATION_OPTIONS = {
+    speed: 40,
+    type: 'scroll'
+}
+
 class Footer extends Component {
     state = {
         name: 'IAN CHUCK-YIN',
@@ -23,17 +28,13 @@ class Footer extends Component {
 
     render() {
         const { name, location, email, phone } = this.state;
-        const typeAnimationOptions = {
-            speed: 40,
-            type: 'scroll'
-        };
 
         const leftSide = (
             <WithTypeAnimation
                 className={styles.Left}
                 text={name}
-                speed={typeAnimationOptions.speed}
-                type={typeAnimationOptions.type} />
+                speed={TYPE_ANIMATION_OPTIONS.speed}
+                type={TYPE_ANIMATION_OPTIONS.type} />
         );
 
         const rightSide = [location, email, phone].map((item, index) => {
@@ -43,8 +44,8 @@ class Footer extends Component {
                     <WithTypeAnimation
                         key={index}
                         text={item.text}
-                        speed={typeAnimationOptions.speed}
-                        type={typeAnimationOptions.type} />
+                        speed={TYPE_ANIMATION_OPTIONS.speed}
+                        type={TYPE_ANIMATION_OPTIONS.type} />
                 </div>
             )
         });

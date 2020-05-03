@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import styles from './FeaturePanel.module.scss';
+import styles from './ProjectPanel.module.scss';
 
-import { appendStyles } from '../../util/StyleAppender';
-import Button from '../Button/Button';
+import { appendStyles } from '../../../util/StyleAppender';
+import Button from '../../Button/Button';
+import Grid from '../../Grid/Grid';
 
-class FeaturePanel extends Component {
+class ProjectPanel extends Component {
 
     SIZE = {
         large: styles.Large,
@@ -24,16 +25,18 @@ class FeaturePanel extends Component {
         }) : null;
 
         return (
-            <div className={appendStyles(styles.FeaturePanel, panelSize)}>
+            <div className={appendStyles(styles.ProjectPanel, panelSize)}>
                 <div className={styles.ImageContainer}>
-                    <img src={image} alt=''/>
+                    <img src={image} alt='' />
                 </div>
                 <div className={styles.ContentContainer}>
                     <div className={styles.TextContainer}>
                         {children}
                     </div>
                     <div className={styles.ButtonContainer}>
-                        {renderedButtons}
+                        <Grid type='spread'>
+                            {renderedButtons}
+                        </Grid>
                     </div>
                 </div>
             </div>
@@ -41,4 +44,4 @@ class FeaturePanel extends Component {
     }
 }
 
-export default FeaturePanel;
+export default ProjectPanel;

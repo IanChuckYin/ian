@@ -59,14 +59,6 @@ const getMostPrevalentElement = (pages) => {
     return mostPrevalentElement;
 }
 
-const getReverseRGB = (rgb) => {
-    const rgbMap = {
-        '#0f1626': '#f5f5f5',
-        '#f5f5f5': '#0f1626'
-    }
-    return rgbMap[rgb];
-}
-
 const rgb2hex = (rgb) => {
     rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
     function hex(x) {
@@ -82,6 +74,5 @@ export {
     isElementVerticallyIntersectingWith,
     isElementHorizontallyIntersectingWith,
     getMostPrevalentElement,
-    rgb2hex,
-    getReverseRGB
+    rgb2hex
 }

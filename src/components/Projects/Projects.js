@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styles from './Projects.module.scss';
 
 import PageTitle from '../PageTitle/PageTitle';
-import FeaturePanel from '../FeaturePanel/FeaturePanel';
+import ProjectPanel from './ProjectPanel/ProjectPanel';
+import ProjectPanelContent from './ProjectPanelContent/ProjectPanelContent';
 import ContentContainer from '../ContentContainer/ContentContainer';
-import PanelContent from '../PanelContent/PanelContent';
 import Grid from '../Grid/Grid';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
 import { routeToNewTabHashed, routeToNewTab } from '../../util/RouteUtil';
@@ -16,7 +16,7 @@ import youtubeLogo from '../../images/youtube_logo.png';
 
 class Projects extends Component {
     state = {
-        contents: [
+        projects: [
             {
                 imageUrl: twitterLogo,
                 textContent: {
@@ -99,13 +99,14 @@ class Projects extends Component {
         routeToNewTab(panelButton.url);
     }
 
-    render() {
-        const { title, id } = this.props;
-        const { contents } = this.state;
-        const featurePanels = contents.map((content, index) => {
-            const { title, subtitle, description, features } = content.textContent;
-            const panelContent = (
-                <PanelContent
+    _renderProjectPanels() {
+        const { projects } = this.state;
+        const projectPanels = projects.map((project, index) => {
+            const { imageUrl, panelButtons, textContent } = project;
+            const { title, subtitle, description, features } = textContent;
+
+            const projectPanelContent = (
+                <ProjectPanelContent
                     theme='light'
                     title={title}
                     subtitle={subtitle}
@@ -114,15 +115,21 @@ class Projects extends Component {
             );
             return (
                 <WithAnimation animation='expand' type='scroll' key={index}>
-                    <FeaturePanel
+                    <ProjectPanel
                         size='large'
-                        image={content.imageUrl}
-                        buttons={content.panelButtons}>
-                        {panelContent}
-                    </FeaturePanel>
+                        image={imageUrl}
+                        buttons={panelButtons}>
+                        {projectPanelContent}
+                    </ProjectPanel>
                 </WithAnimation>
             );
         });
+        return projectPanels
+    }
+
+    render() {
+        const { title, id } = this.props;
+        const projectPanels = this._renderProjectPanels();
 
         return (
             <div className={styles.Projects} id={id}>
@@ -130,7 +137,7 @@ class Projects extends Component {
                 <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
                         <Grid type='center'>
-                            {featurePanels}
+                            {projectPanels}
                         </Grid>
                     </ContentContainer>
                 </WithAnimation>

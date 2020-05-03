@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import styles from '../Timeline/Timeline.module.scss';
+import styles from '../Timeline.module.scss';
 
-import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
-import SplitContainer from '../SplitContainer/SplitContainer';
-import { appendStyles } from '../../util/StyleAppender';
-import { isEven, isOdd } from '../../util/Math';
+import WithAnimation from '../../../hoc/WithAnimation/WithAnimation';
+import SplitContainer from '../../SplitContainer/SplitContainer';
+import { appendStyles } from '../../../util/StyleAppender';
+import { isEven, isOdd } from '../../../util/Math';
+import Aux from '../../../hoc/Aux/Aux';
 
 class TimelineContainer extends Component {
 
@@ -54,12 +55,12 @@ class TimelineContainer extends Component {
         });
 
         return (
-            <div>
+            <Aux>
                 <WithAnimation animation='up' type='scroll'>
                     <div className={styles.TimelineHeader}>{header}</div>
                 </WithAnimation>
                 {timelinePanels}
-            </div>
+            </Aux>
         );
     }
 }

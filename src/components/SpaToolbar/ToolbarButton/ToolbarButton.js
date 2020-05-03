@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from './ToolbarButton.module.scss';
 
-import { appendStyles } from '../../util/StyleAppender';
-import selectors from '../../util/Selectors';
+import { appendStyles } from '../../../util/StyleAppender';
+import selectors from '../../../util/Selectors';
 
 class ToolbarButton extends Component {
 
