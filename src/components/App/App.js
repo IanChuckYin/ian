@@ -28,7 +28,7 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
-    console.log(path);
+    console.log(path, process.env);
     const renderedRoutes = (
       <Switch>
         {routes.map((route, index) => <Route key={index} path={path + route.path} component={route.component} />)}
