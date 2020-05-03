@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './App.module.scss';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import path from '../../path';
 
 import Layout from '../Layout/Layout';
 import Home from '../Home/Home';
@@ -28,11 +27,11 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
-    console.log(path, process.env);
+    console.log(process.env);
     const renderedRoutes = (
       <Switch>
         {routes.map((route, index) => <Route key={index} path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
-        <Redirect to={process.env.PUBLIC_URL} />
+        <Redirect to='/' />
       </Switch>
     );
 
