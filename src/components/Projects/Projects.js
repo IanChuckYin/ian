@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Projects.module.scss';
+import path from '../../path';
 
 import PageTitle from '../PageTitle/PageTitle';
 import FeaturePanel from '../FeaturePanel/FeaturePanel';
@@ -91,7 +92,7 @@ class Projects extends Component {
     }
 
     _onButtonClick(panelButton) {
-        window.open(process.env.PUBLIC_URL + panelButton.url);
+        window.open(path + panelButton.url);
     }
 
     render() {
