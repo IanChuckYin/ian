@@ -27,20 +27,18 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
-    console.log(process.env);
-    // const renderedRoutes = (
-    //   <Switch>
-    //     {routes.map((route, index) => <Route key={index} exact path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
-    //     <Redirect to='/' />
-    //   </Switch>
-    // );
+    const renderedRoutes = (
+      <Switch>
+        {routes.map((route, index) => <Route key={index} exact path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
+        <Redirect to='/' />
+      </Switch>
+    );
 
     return (
       <div className={styles.App}>
-      FUCk you
-        {/* <Layout>
+        <Layout>
           {renderedRoutes}
-        </Layout> */}
+        </Layout>
       </div>
     );
   }
