@@ -1,6 +1,6 @@
 {
   "name": "ian-react-website",
-  "homepage": "https://ianchuckyin.github.io/ian-portfolio",
+  "homepage": "ianchuckyin.github.io/ian-portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

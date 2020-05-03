@@ -27,7 +27,7 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
-    console.log('loaded');
+    console.log(process.env.PUBLIC_URL);
     const renderedRoutes = (
       <Switch>
         {routes.map((route, index) => <Route key={index} path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
