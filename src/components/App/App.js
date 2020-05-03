@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './App.module.scss';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
 import Home from '../Home/Home';
@@ -27,11 +27,14 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
+    const publicUrl = process.env.PUBLIC_URL;
     const renderedRoutes = (
-      <Switch>
-        {routes.map((route, index) => <Route key={index} exact path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
-        <Redirect to={process.env.PUBLIC_URL} />
-      </Switch>
+      <HashRouter basename={publicUrl}>
+        <Switch>
+          {routes.map((route, index) => <Route key={index} exact path={route.path} component={route.component} />)}
+          <Redirect to={publicUrl} />
+        </Switch>
+      </HashRouter>
     );
 
     return (

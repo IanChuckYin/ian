@@ -91,7 +91,8 @@ class Projects extends Component {
     }
 
     _onButtonClick(panelButton) {
-        window.open(process.env.PUBLIC_URL + panelButton.url);
+        const hashedRoute = process.env.PUBLIC_URL + '/#';
+        window.open(hashedRoute + panelButton.url);
     }
 
     render() {
