@@ -30,7 +30,7 @@ class App extends Component {
     const renderedRoutes = (
       <Switch>
         {routes.map((route, index) => <Route key={index} exact path={process.env.PUBLIC_URL + route.path} component={route.component} />)}
-        <Redirect to='/' />
+        <Redirect to={process.env.PUBLIC_URL} />
       </Switch>
     );
 
