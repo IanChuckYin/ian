@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/ian/static/css/main.cc8be40c.chunk.css",
-    "main.js": "/ian/static/js/main.315001c8.chunk.js",
-    "main.js.map": "/ian/static/js/main.315001c8.chunk.js.map",
+    "main.css": "/ian/static/css/main.5cffe371.chunk.css",
+    "main.js": "/ian/static/js/main.ae938d82.chunk.js",
+    "main.js.map": "/ian/static/js/main.ae938d82.chunk.js.map",
     "runtime-main.js": "/ian/static/js/runtime-main.07d4c67e.js",
     "runtime-main.js.map": "/ian/static/js/runtime-main.07d4c67e.js.map",
-    "static/js/2.94cc759f.chunk.js": "/ian/static/js/2.94cc759f.chunk.js",
-    "static/js/2.94cc759f.chunk.js.map": "/ian/static/js/2.94cc759f.chunk.js.map",
+    "static/js/2.172bbb22.chunk.js": "/ian/static/js/2.172bbb22.chunk.js",
+    "static/js/2.172bbb22.chunk.js.map": "/ian/static/js/2.172bbb22.chunk.js.map",
     "index.html": "/ian/index.html",
-    "precache-manifest.aa3e911a30b92091821fe814a7eaabf3.js": "/ian/precache-manifest.aa3e911a30b92091821fe814a7eaabf3.js",
+    "precache-manifest.d80940a8ed77924d38685a29de0eb6b8.js": "/ian/precache-manifest.d80940a8ed77924d38685a29de0eb6b8.js",
     "service-worker.js": "/ian/service-worker.js",
-    "static/css/main.cc8be40c.chunk.css.map": "/ian/static/css/main.cc8be40c.chunk.css.map",
-    "static/js/2.94cc759f.chunk.js.LICENSE.txt": "/ian/static/js/2.94cc759f.chunk.js.LICENSE.txt",
+    "static/css/main.5cffe371.chunk.css.map": "/ian/static/css/main.5cffe371.chunk.css.map",
+    "static/js/2.172bbb22.chunk.js.LICENSE.txt": "/ian/static/js/2.172bbb22.chunk.js.LICENSE.txt",
     "static/media/c_logo.png": "/ian/static/media/c_logo.a66a869f.png",
     "static/media/clojure_logo.png": "/ian/static/media/clojure_logo.78ba9e22.png",
     "static/media/java_logo.png": "/ian/static/media/java_logo.7531ac85.png",
     "static/media/js_logo.png": "/ian/static/media/js_logo.1cff25ec.png",
     "static/media/la-icon.png": "/ian/static/media/la-icon.29d30268.png",
     "static/media/la-image.png": "/ian/static/media/la-image.a7e7f88a.png",
+    "static/media/profile_pic_website.png": "/ian/static/media/profile_pic_website.35fdbb25.png",
     "static/media/python_logo.png": "/ian/static/media/python_logo.65232491.png",
     "static/media/slider-bg.jpg": "/ian/static/media/slider-bg.8d52bff8.jpg",
     "static/media/sql_logo.png": "/ian/static/media/sql_logo.50156c71.png",
@@ -33,8 +34,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.07d4c67e.js",
-    "static/js/2.94cc759f.chunk.js",
-    "static/css/main.cc8be40c.chunk.css",
-    "static/js/main.315001c8.chunk.js"
+    "static/js/2.172bbb22.chunk.js",
+    "static/css/main.5cffe371.chunk.css",
+    "static/js/main.ae938d82.chunk.js"
   ]
 }
