@@ -6,10 +6,8 @@ import ContentContainer from '../ContentContainer/ContentContainer';
 import SplitContainer from '../SplitContainer/SplitContainer';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
 
-const ANIMATION_OPTIONS = {
-    animation: 'up',
-    type: 'scroll'
-}
+// Images
+import me from '../../images/profile_pic_website.png';
 
 /**
  * Our About Me component
@@ -26,16 +24,32 @@ class AboutMe extends Component {
     render() {
         const { title, id } = this.props;
         const { content } = this.state;
-        const aboutMeContent = content.map((content, index) => {
-            return <p key={index}>{content}</p>
+        const leftContent = content.map((content, index) => {
+            return (
+                <WithAnimation animation='right' type='scroll'>
+                    <p key={index}>{content}</p>
+                </WithAnimation>
+            );
         });
+
+        const rightContent = (
+            <WithAnimation animation='left' type='scroll'>
+                <div>
+                    <img src={me} alt='' />
+                </div>
+            </WithAnimation>
+        )
 
         return (
             <div className={styles.AboutMe} id={id}>
                 <PageTitle title={title} />
-                <WithAnimation animation={ANIMATION_OPTIONS.animation} type={ANIMATION_OPTIONS.type}>
+                <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
-                        <SplitContainer left={aboutMeContent} split='50'/>
+                        <SplitContainer
+                            left={leftContent}
+                            right={rightContent}
+                            split='50'
+                            polar={true} />
                     </ContentContainer>
                 </WithAnimation>
             </div>

@@ -5,9 +5,9 @@
 }
 
 .ExperienceContent {
-    font-size: 16px;
+    font-size: $text-size;
     margin: 10px 0px;
-    line-height: 25px;
+    line-height: $line-height;
 
     .dash {
         background-color: $color-1;

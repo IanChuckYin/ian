@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
-$panel-width: 200px;
-$panel-height: 400px; 
+$panel-width: 250px;
+$panel-height: 450px; 
 $image-size: 100px;
 
 .SkillSetPanel {
@@ -32,6 +32,6 @@ $image-size: 100px;
 
 .Description {
     color: $color-4;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: $text-size;
+    line-height: $line-height;
 }

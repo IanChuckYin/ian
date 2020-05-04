@@ -31,7 +31,7 @@ class SkillSet extends Component {
             {
                 title: 'JavaScript',
                 logo: javascriptLogo,
-                description: 'Experienced in web application development using modern JS frameworks such as React and Ember. Also experienced in writing server side code with Node.'
+                description: 'Experienced in web application development using modern JS frameworks such as React and Ember. Also experienced in writing server side code with Node and Express.'
             },
             {
                 title: 'Python',
