@@ -2,13 +2,6 @@
 
 .ProjectPanelContent {
     letter-spacing: 1px;
-}
-
-.Light {
-    color: $color-3;
-}
-
-.Dark { 
     color: $color-4;
 }
 
@@ -19,18 +12,19 @@
 }
 
 .subtitle {
-    font-size: 12px;
-    color: $color-1;
+    font-size: 14px;
+    color: $color-4;
     margin: 10px 0px;
     text-align: center;
+    font-weight: 800;
 }
 
 .description {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .features {
-    border-top: 1px solid $color-2;
+    border-top: 1px solid $color-1;
     margin: 10px 0px;
     font-size: 14px;
 }

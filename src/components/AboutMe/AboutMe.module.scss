@@ -1,9 +1,27 @@
 @import '../../styles/variables.scss';
 
+$reverse-thickness: -$border-thickness;
+$image-size: 100%;
+
 .AboutMe {
     padding: $page-padding;
-    background-color: $color-4;
-    color: $color-3;
+    background-color: $color-3;
+}
+
+.AboutMeContent {
+    color: $color-4;
     font-size: $text-size;
-    line-height: $line-height
+    line-height: $line-height;
+    margin-bottom: 40px;
+}
+
+.BottomCaret {
+    border-left: 50px solid transparent;
+    border-top: 10px solid $color-1;
+}
+
+.Image {
+    width: $image-size;
+    box-shadow: $border-thickness $reverse-thickness $color-4;
+    margin: 0px 15px;
 }

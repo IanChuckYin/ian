@@ -9,14 +9,13 @@
     border-radius: 10px;
     outline: none;
     cursor: pointer;
-    color: $color-2;
+    color: $color-4;
     background-color: $color-3;
-    border: 1px solid $color-2;
+    border: 1px solid $color-4;
     letter-spacing: 1px;
     font-size: 14px;
 }
 
 .Button:hover {
-    color: $color-1;
-    border: 1px solid $color-1;
+    background-color: $color-1;
 }

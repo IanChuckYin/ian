@@ -58,6 +58,7 @@ class Footer extends Component {
                     right={rightSide}
                     middle={true}
                     polar={true} />
+                <span className={styles.credits}>Image credits to: <a href="http://www.freepik.com">freepik</a></span>
             </div>
         );
     }

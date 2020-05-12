@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.Wrapper {
+    margin-top: -$section-border;
+    top: 0;
+    position: absolute;
+    right: 0
+}
+
+.Triangle {
+    border-bottom: 100px solid transparent;
+    border-right: 50vw solid $color-1;
+    position: absolute;
+    z-index: $top-layer;
+    right: 0;
+}
+
+.Border {
+    z-index: $mid-layer;
+    margin-top: $section-border;
+    border-right: 50vw solid $color-4;
+}

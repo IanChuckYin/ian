@@ -6,14 +6,20 @@ import ContentContainer from '../ContentContainer/ContentContainer'
 import Grid from '../Grid/Grid';
 import SkillSetPanel from '../SkillSetPanel/SkillSetPanel';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
+import RotatedContainer from '../RotatedContainer/RotatedContainer';
+import BackgroundImageRenderer from '../BackgroundImageRenderer/BackgroundImageRenderer';
 
 // Images
-import javascriptLogo from '../../images/js_logo.png';
-import pythonLogo from '../../images/python_logo.png';
-import javaLogo from '../../images/java_logo.png';
-import cLogo from '../../images/c_logo.png';
-import sqlLogo from '../../images/sql_logo.png';
-import clojureLogo from '../../images/clojure_logo.png';
+import javascriptLogo from '../../images/Logos/js_logo.png';
+import pythonLogo from '../../images/Logos/python_logo.png';
+import javaLogo from '../../images/Logos/java_logo.png';
+import cLogo from '../../images/Logos/c_logo.png';
+import sqlLogo from '../../images/Logos/sql_logo.png';
+import clojureLogo from '../../images/Logos/clojure_logo.png';
+import skillSetBackgroundImage from '../../images/Backgrounds/paper-3.png';
+
+// Shapes
+import Triangle from '../Shapes/Triangle/Triangle';
 
 const PANEL_ANIMATION_OPTIONS = {
     animation: 'expand',
@@ -80,8 +86,13 @@ class SkillSet extends Component {
         });
 
         return (
-            <div className={styles.SkillSet} id={id}>
-                <PageTitle title={title} />
+            <BackgroundImageRenderer className={styles.SkillSet} id={id} image={skillSetBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='up' type='scroll'>
+                    <RotatedContainer tilt='up' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
                 <WithAnimation
                     animation={CONTAINER_ANIMATION_OPTIONS.animation}
                     type={CONTAINER_ANIMATION_OPTIONS.type}>
@@ -91,7 +102,7 @@ class SkillSet extends Component {
                         </Grid>
                     </ContentContainer>
                 </WithAnimation>
-            </div>
+            </BackgroundImageRenderer>
         );
     }
 }

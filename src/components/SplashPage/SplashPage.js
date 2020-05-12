@@ -3,63 +3,85 @@ import styles from './SplashPage.module.scss';
 
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
 import WithTypeAnimation from '../../hoc/WithTypeAnimation/WithTypeAnimation';
+import SplitContainer from '../SplitContainer/SplitContainer';
+import RotatedContainer from '../RotatedContainer/RotatedContainer';
+import BackgroundImageRenderer from '../BackgroundImageRenderer/BackgroundImageRenderer';
 
-const TYPE_ANIMATION_OPTIONS = {
-    speed: 80,
-    type: 'onload'
-}
-
-const CONTAINER_ANIMATION_OPTIONS = {
-    animation: 'fadeIn',
-    type: 'onload'
-}
-
-const CONTENT_ANIMATION_OPTIONS = {
-    animation: 'up',
-    type: 'onload'
-}
+// Images
+import splashBackground from '../../images/Backgrounds/paper-2.png';
 
 class SplashPage extends Component {
     state = {
-        title: "IAN CHUCK-YIN",
-        subtitle: "SOFTWARE ENGINEER"
+        title: ["IAN", "CHUCK-YIN"],
+        subtitle: ["SOFTWARE", "ENGINEER"]
     }
 
     render() {
         const { title, subtitle } = this.state;
         const { image } = this.props;
 
-        return (
+        const name = title.map((content, index) => {
+            return (
+                <WithTypeAnimation
+                    key={index}
+                    text={content}
+                    speed={100}
+                    type='onload'
+                />
+            );
+        });
+
+        const occupation = subtitle.map((content, index) => {
+            return (
+                <WithTypeAnimation
+                    key={index}
+                    text={content}
+                    speed={200}
+                    type='onload'
+                />
+            );
+        });
+
+        const leftSide = (
             <WithAnimation
-                animation={CONTAINER_ANIMATION_OPTIONS.animation}
-                type={CONTAINER_ANIMATION_OPTIONS.type}>
-                <div className={styles.SplashPage}>
-                    <WithAnimation
-                        animation={CONTENT_ANIMATION_OPTIONS.animation}
-                        type={CONTENT_ANIMATION_OPTIONS.type}>
-                        <div className={styles.SplashContent}>
-                            <WithTypeAnimation
-                                className={styles.Title}
-                                text={title}
-                                speed={TYPE_ANIMATION_OPTIONS.speed}
-                                type={TYPE_ANIMATION_OPTIONS.type}
-                            />
-                            <WithTypeAnimation
-                                className={styles.Content}
-                                text={subtitle}
-                                speed={TYPE_ANIMATION_OPTIONS.speed}
-                                type={TYPE_ANIMATION_OPTIONS.type}
-                            />
+                animation='right'
+                type='onload'
+                fill={true}>
+                <BackgroundImageRenderer className={styles.SplashContent} image={splashBackground} cover={false}>
+                    <RotatedContainer tilt='up' deg='3'>
+                        <div className={styles.TitleContent}>
+                            {name}
                         </div>
-                    </WithAnimation>
-                    <div className={styles.SplashImageContainer}>
-                        <img
-                            className={styles.SplashImage}
-                            src={image}
-                            alt="splash" />
-                    </div>
+                    </RotatedContainer>
+                    <RotatedContainer tilt='down' deg='3'>
+                        <div className={styles.SubtitleContent}>
+                            {occupation}
+                        </div>
+                    </RotatedContainer>
+                </BackgroundImageRenderer>
+            </WithAnimation>
+        );
+
+        const rightSide = (
+            <WithAnimation
+                animation='left'
+                type='onload'>
+                <div className={styles.SplashImageContainer}>
+                    <img
+                        className={styles.SplashImage}
+                        src={image}
+                        alt="splash" />
                 </div>
             </WithAnimation>
+        );
+
+        return (
+            <div className={styles.SplashPage}>
+                <SplitContainer
+                    left={leftSide}
+                    right={rightSide}
+                    split='50' />
+            </div>
         );
     }
 }

@@ -45,7 +45,7 @@ class ExperiencePanel extends Component {
 
         return (
             <div className={styles.ExperiencePanel}>
-                <SplitContainer left={leftSide} right={rightSide} split='70' />
+                <SplitContainer left={leftSide} right={rightSide} split='80' />
                 {experienceContent}
             </div>
         );

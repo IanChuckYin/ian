@@ -1,30 +1,45 @@
 @import '../../styles/variables.scss';
 
 .SplashPage {
-    color: $color-3;
+    color: $color-4;
 }
 
 .SplashContent {
-    position: absolute;
     padding: $page-padding;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     text-align: left;
-}
-
-.Title {
-    font-size: 100px;
-    padding: 10px 0px;
-    letter-spacing: 25px;
-    text-shadow: 6px 6px $color-4;
-}
-
-.Content {
-    font-size: 20px;
     letter-spacing: 20px;
-    text-shadow: 4px 4px $color-4;
-    padding: 10px 0px;
+    font-weight: 800;
+    text-shadow: 2px 2px $color-3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.TitleContent {
+    font-size: 26px;
+
+    div {
+        padding: 10px 0px;
+    }
+
+    div:nth-child(2) {
+        margin-left: 25px;
+    }
+}
+
+.SubtitleContent {
+    font-size: 20px;
+
+    div {
+        padding: 10px 0px;
+    }
+
+    div:nth-child(2) {
+        margin-left: 100px;
+    }
 }
 
 .SplashImageContainer {

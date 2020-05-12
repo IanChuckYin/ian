@@ -18,8 +18,7 @@ class SplitContainer extends Component {
     render() {
         const { left, right, split, middle, polar } = this.props;
         const leftWidth = { width: `${split}%`};
-        const rightWidth = { width: `${100 - leftWidth}%`};
-
+        const rightWidth = { width: `${100 - parseInt(split)}%`};
         const middleStyle = middle ? styles.Middle : null;
 
         const leftContainerStyle = appendStyles(styles.SplitContainer, middleStyle, polar ? styles.AlignLeft : null);

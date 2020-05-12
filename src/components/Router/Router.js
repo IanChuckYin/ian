@@ -23,8 +23,9 @@ class Router extends Component {
     const switchRoutes = (
         <Switch>
           {routes.map((route, index) => {
+              const { path, component } = route;
               return (
-                <Route key={index} exact path={route.path} component={route.component} />
+                <Route key={index} exact path={path} component={component} />
               );
           })}
           <Redirect to={PUBLIC_URL} />

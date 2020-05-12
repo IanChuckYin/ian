@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './SkillSetPanel.module.scss';
+import RotatedContainer from '../RotatedContainer/RotatedContainer';
 
 class SkillSetPanel extends Component {
 
@@ -9,7 +10,11 @@ class SkillSetPanel extends Component {
         return (
             <div className={styles.SkillSetPanel}>
                 <img src={image} className={styles.Image} alt='' />
-                <div className={styles.Title}>{title}</div>
+                <div className={styles.TitleContainer}>
+                    <RotatedContainer tilt='down' deg='3'>
+                        {title}
+                    </RotatedContainer>
+                </div>
                 <div className={styles.Description}>{description}</div>
             </div>
         );

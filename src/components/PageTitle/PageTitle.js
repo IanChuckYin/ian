@@ -3,7 +3,7 @@ import styles from './PageTitle.module.scss';
 import WithTypeAnimation from '../../hoc/WithTypeAnimation/WithTypeAnimation';
 
 const TYPE_ANIMATION_OPTIONS = {
-    speed: 50,
+    speed: 100,
     type: 'scroll'
 }
 

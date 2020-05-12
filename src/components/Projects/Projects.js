@@ -8,15 +8,41 @@ import ContentContainer from '../ContentContainer/ContentContainer';
 import Grid from '../Grid/Grid';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
 import { routeToNewTabHashed, routeToNewTab } from '../../util/RouteUtil';
+import RotatedContainer from '../RotatedContainer/RotatedContainer';
+import BackgroundImageRenderer from '../BackgroundImageRenderer/BackgroundImageRenderer';
 
 // Images
-import unityLogo from '../../images/unity_logo.png';
-import twitterLogo from '../../images/twitter_logo.png';
-import youtubeLogo from '../../images/youtube_logo.png';
+import unityLogo from '../../images/Logos/unity_logo.png';
+import twitterLogo from '../../images/Logos/twitter_logo.png';
+import youtubeLogo from '../../images/Logos/youtube_logo.png';
+import projectsBackgroundImage from '../../images/Backgrounds/paper-1.png';
+
+// Shapes
+import Triangle from '../Shapes/Triangle/Triangle';
 
 class Projects extends Component {
     state = {
         projects: [
+            {
+                imageUrl: youtubeLogo,
+                textContent: {
+                    title: "YouTube Webscraper",
+                    subtitle: "Python",
+                    description: "A web scraper that goes into anyone's YouTube channel and collects data about their sponsors from their videos.",
+                    features: [
+                        "Written using the Selenium automation tool, BeautifulSoup4 and ChromeDriver",
+                        "Exports an Excel file containing data about a channel's sponsor links",
+                        "Running the script against the same channel will update the existing Excel file with the new data"
+                    ]
+                },
+                panelButtons: [
+                    {
+                        label: "VIEW CODE",
+                        url: 'https://github.com/IanChuckYin/youtube-scraper',
+                        onClickEvent: this._routeToNewTab.bind(this)
+                    }
+                ]
+            },
             {
                 imageUrl: twitterLogo,
                 textContent: {
@@ -67,26 +93,6 @@ class Projects extends Component {
                         onClickEvent: this._routeToNewTab.bind(this)
                     }
                 ]
-            },
-            {
-                imageUrl: youtubeLogo,
-                textContent: {
-                    title: "YouTube Webscraper",
-                    subtitle: "Python",
-                    description: "A web scraper that goes into anyone's YouTube channel and collects data about their sponsors from their videos.",
-                    features: [
-                        "Written using the Selenium automation tool, BeautifulSoup4 and ChromeDriver",
-                        "Exports an Excel file containing data about a channel's sponsor links",
-                        "Running the script against the same channel will update the existing Excel file with the new data"
-                    ]
-                },
-                panelButtons: [
-                    {
-                        label: "VIEW CODE",
-                        url: 'https://github.com/IanChuckYin/youtube-scraper',
-                        onClickEvent: this._routeToNewTab.bind(this)
-                    }
-                ]
             }
         ]
     }
@@ -107,7 +113,6 @@ class Projects extends Component {
 
             const projectPanelContent = (
                 <ProjectPanelContent
-                    theme='light'
                     title={title}
                     subtitle={subtitle}
                     description={description}
@@ -132,8 +137,13 @@ class Projects extends Component {
         const projectPanels = this._renderProjectPanels();
 
         return (
-            <div className={styles.Projects} id={id}>
-                <PageTitle title={title} />
+            <BackgroundImageRenderer className={styles.Projects} id={id} image={projectsBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='down' type='scroll'>
+                    <RotatedContainer tilt='down' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
                 <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
                         <Grid type='center'>
@@ -141,7 +151,7 @@ class Projects extends Component {
                         </Grid>
                     </ContentContainer>
                 </WithAnimation>
-            </div>
+            </BackgroundImageRenderer>
         );
     }
 }

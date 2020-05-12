@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+$rotation: 3deg;
+
+.Wrapper {
+    transition: 0.5s ease;
+}
+
+.RotatedContainer {
+    padding: 15px;
+}
+
+.Wrapper:hover {
+    transform: scale(1.03);
+}

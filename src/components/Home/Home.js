@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './Home.module.scss';
 
 import Toolbar from '../SpaToolbar/Toolbar/Toolbar';
 import SplashPage from '../SplashPage/SplashPage';
@@ -7,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Aux from '../../hoc/Aux/Aux';
 
 // Images
-import splashImage from '../../images/slider-bg.jpg';
+import splashImage from '../../images/Gifs/coffee.gif';
 
 /**
  * Our single page application Home page that includes the SpaToolbar, SplashPage, renderedPage, and Footer.
@@ -28,7 +29,11 @@ class Home extends Component {
     render() {
         const { pages } = this.state;
         const renderedPages = pages.map((page, index) => {
-            return <Aux key={index}>{page}</Aux>
+            return (
+                <div key={index} className={styles.Page}>
+                    {page}
+                </div>
+            )
         });
 
         return (

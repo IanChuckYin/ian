@@ -23,7 +23,8 @@ class Toolbar extends Component {
     state = {
         domPages: [],
         rgbMap: {},
-        selectedButton: null
+        selectedButton: null,
+        defaultColor: styles.color4
     }
 
     // Lifecycle hook when component is mounted
@@ -91,16 +92,29 @@ class Toolbar extends Component {
         return pageElementMap;
     }
 
+    _updateButtonStyle(button, color) {
+        const buttonBorder = button.getElementsByClassName(selectors.TOOLBAR_BUTTON_BORDER)[0];
+        buttonBorder.style.borderColor = color;
+        button.style.color = color;
+    }
+
     // Updates the colors of our toolbar buttons according to the pageElementMap
     _updateToolbarStyle() {
-        const { rgbMap } = this.state;
+        const { rgbMap, defaultColor } = this.state;
         const pageElementMap = this._getPageElementMap();
-
-        Object.keys(pageElementMap).forEach((colorKey) => {
-            pageElementMap[colorKey].forEach(element => {
-                const buttonBorder = element.getElementsByClassName(selectors.TOOLBAR_BUTTON_BORDER)[0];
-                buttonBorder.style.borderColor = rgbMap[colorKey];
-                element.style.color = rgbMap[colorKey];
+        const pageElementMapKeys = Object.keys(pageElementMap);
+        // set toolbar colors to our default colors if our pageElementMap is empty
+        if (pageElementMapKeys.length === 0) {
+            const toolbarButtons = [...document.getElementsByClassName(selectors.TOOLBAR_BUTTON)];
+            toolbarButtons.forEach(button => {
+                this._updateButtonStyle(button, defaultColor);
+            });
+            return;
+        }
+        // otherwise apply the new colors
+        pageElementMapKeys.forEach((colorKey) => {
+            pageElementMap[colorKey].forEach(button => {
+                this._updateButtonStyle(button, rgbMap[colorKey]);
             });
         });
     }

@@ -8,20 +8,26 @@ import ExperiencePanel from '../ExperiencePanel/ExperiencePanel';
 import EducationPanel from '../EducationPanel/EducationPanel';
 import ContentContainer from '../ContentContainer/ContentContainer';
 import WithAnimation from '../../hoc/WithAnimation/WithAnimation';
+import RotatedContainer from '../RotatedContainer/RotatedContainer';
+import BackgroundImageRenderer from '../BackgroundImageRenderer/BackgroundImageRenderer';
 
 // Logos
-import uhnLogo from '../../images/uhn-logo.png';
-import uwaiLogo from '../../images/uwai-logo.png';
-import liquidLogo from '../../images/la-icon.png';
-import unchartedLogo from '../../images/uncharted-logo.png';
-import waterlooLogo from '../../images/waterloo-logo.png';
+import uhnLogo from '../../images/Logos/uhn-logo.png';
+import uwaiLogo from '../../images/Logos/uwai-logo.png';
+import liquidLogo from '../../images/Logos/la-icon.png';
+import unchartedLogo from '../../images/Logos/uncharted-logo.png';
+import waterlooLogo from '../../images/Logos/waterloo-logo.png';
 
 // Images
-import waterlooImage from '../../images/waterloo-image.png';
-import unchartedImage from '../../images/uncharted-image.png';
-import uhnImage from '../../images/uhn-image.png';
-import liquidImage from '../../images/la-image.png';
-import uwaiImage from '../../images/uwai-image.png';
+import waterlooImage from '../../images/Misc/waterloo-image.png';
+import unchartedImage from '../../images/Misc/uncharted-image.png';
+import uhnImage from '../../images/Misc/uhn-image.png';
+import liquidImage from '../../images/Misc/la-image.png';
+import uwaiImage from '../../images/Misc/uwai-image.png';
+import resumeBackgroundImage from '../../images/Backgrounds/paper-2.png';
+
+// Shapes
+import Triangle from '../Shapes/Triangle/Triangle';
 
 class Resume extends Component {
     state = {
@@ -162,8 +168,13 @@ class Resume extends Component {
         const { title, id } = this.props;
 
         return (
-            <div className={styles.Resume} id={id}>
-                <PageTitle title={title} />
+            <BackgroundImageRenderer className={styles.Resume} id={id} image={resumeBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='up' type='scroll'>
+                    <RotatedContainer tilt='up' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
                 <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
                         <Timeline>
@@ -172,7 +183,7 @@ class Resume extends Component {
                         </Timeline>
                     </ContentContainer>
                 </WithAnimation>
-            </div>
+            </BackgroundImageRenderer>
         );
     }
 }
