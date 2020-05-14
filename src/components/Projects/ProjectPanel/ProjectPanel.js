@@ -21,7 +21,8 @@ class ProjectPanel extends Component {
                 <Button
                     key={index}
                     onButtonClick={() => button.onClickEvent(button)}
-                    label={button.label} />
+                    label={button.label}
+                    isMobile={isMobile} />
             );
         }) : null;
 

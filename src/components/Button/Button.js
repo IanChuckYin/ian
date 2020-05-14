@@ -4,11 +4,11 @@ import styles from './Button.module.scss';
 class Button extends Component {
 
     render() {
-        const { onButtonClick, label } = this.props;
-
+        const { onButtonClick, label, isMobile } = this.props;
+        const renderedStyle = isMobile ? styles.MobileButton : styles.DesktopButton;
         return (
             <div
-                className={styles.Button}
+                className={renderedStyle}
                 onClick={() => onButtonClick()}>
                 {label}
             </div>
