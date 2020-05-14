@@ -26,6 +26,7 @@ class ProjectPanel extends Component {
         }) : null;
 
         const renderedStyle = isMobile ? styles.Mobile : styles.Desktop;
+        const gridType = isMobile ? 'center' : 'spread';
 
         return (
             <div className={renderedStyle}>
@@ -38,7 +39,7 @@ class ProjectPanel extends Component {
                             {children}
                         </div>
                         <div className={styles.ButtonContainer}>
-                            <Grid type='spread'>
+                            <Grid type={gridType}>
                                 {renderedButtons}
                             </Grid>
                         </div>
