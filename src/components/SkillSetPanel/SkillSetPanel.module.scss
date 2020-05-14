@@ -4,35 +4,72 @@ $panel-width: 250px;
 $panel-height: 500px; 
 $image-size: 100px;
 
-.SkillSetPanel {
-    width: $panel-width;
-    height: $panel-height;
-    padding: 15px;
-    margin: 15px;
-    border: 3px solid $color-4;
-    transition: 0.5s ease;
-    background-color: $color-3;
+.Desktop {
+    .SkillSetPanel {
+        width: $panel-width;
+        height: $panel-height;
+        padding: 15px;
+        margin: 15px;
+        border: 3px solid $color-4;
+        transition: 0.5s ease;
+        background-color: $color-3;
+    }
+    
+    .SkillSetPanel:hover {
+        transform: scale(1.03);
+    }
+    
+    .Image {
+        width: $image-size;
+        height: $image-size;
+    }
+    
+    .TitleContainer {
+        margin: 40px 0px 20px 0px;
+        font-size: 24px;
+        color: $color-4;
+        letter-spacing: 1px;
+        font-weight: 800;
+    }
+    
+    .Description {
+        color: $color-4;
+        font-size: $text-size;
+        line-height: $line-height;
+    }
 }
 
-.SkillSetPanel:hover {
-    transform: scale(1.03);
-}
 
-.Image {
-    width: $image-size;
-    height: $image-size;
-}
-
-.TitleContainer {
-    margin: 40px 0px 20px 0px;
-    font-size: 24px;
-    color: $color-4;
-    letter-spacing: 1px;
-    font-weight: 800;
-}
-
-.Description {
-    color: $color-4;
-    font-size: $text-size;
-    line-height: $line-height;
+.Mobile {
+    .SkillSetPanel {
+        height: $panel-height;
+        padding: 15px;
+        margin: 5px;
+        border: 3px solid $color-4;
+        transition: 0.5s ease;
+        background-color: $color-3;
+    }
+    
+    .SkillSetPanel:hover {
+        transform: scale(1.03);
+    }
+    
+    .Image {
+        width: $image-size;
+        height: $image-size;
+    }
+    
+    .TitleContainer {
+        margin: 40px 0px 20px 0px;
+        font-size: 24px;
+        color: $color-4;
+        letter-spacing: 1px;
+        font-weight: 800;
+    }
+    
+    .Description {
+        color: $color-4;
+        font-size: $text-size;
+        line-height: $line-height;
+    }
 }

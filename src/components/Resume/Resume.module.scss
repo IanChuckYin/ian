@@ -1,7 +1,17 @@
 @import '../../styles/variables.scss';
 
-.Resume {
-    padding: $page-padding;
-    background-color: $color-3;
-    color: $color-4;
+.Desktop {
+    .Resume {
+        padding: $page-padding;
+        background-color: $color-3;
+        color: $color-4;
+    }
+}
+
+.Mobile {
+    .Resume {
+        padding: $mobile-padding;
+        background-color: $color-3;
+        color: $color-4;
+    }
 }

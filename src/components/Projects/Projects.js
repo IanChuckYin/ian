@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Projects.module.scss';
+import { connect } from 'react-redux';
 
 import PageTitle from '../PageTitle/PageTitle';
 import ProjectPanel from './ProjectPanel/ProjectPanel';
@@ -131,13 +132,16 @@ class Projects extends Component {
         });
         return projectPanels
     }
-
-    render() {
-        const { title, id } = this.props;
+    
+    /**
+     * The desktop version of our Projects
+     */
+    _renderDesktopVersion() {
+        const { title } = this.props;
         const projectPanels = this._renderProjectPanels();
 
         return (
-            <BackgroundImageRenderer className={styles.Projects} id={id} image={projectsBackgroundImage}>
+            <BackgroundImageRenderer className={styles.Projects} image={projectsBackgroundImage}>
                 <Triangle />
                 <WithAnimation animation='down' type='scroll'>
                     <RotatedContainer tilt='down' deg='3'>
@@ -154,6 +158,47 @@ class Projects extends Component {
             </BackgroundImageRenderer>
         );
     }
+
+    /**
+     * The mobile version of our Projects
+     */
+    _renderMobileVersion() {
+        const { title } = this.props;
+        const projectPanels = this._renderProjectPanels();
+
+        return (
+            <BackgroundImageRenderer className={styles.Projects} image={projectsBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='down' type='scroll'>
+                    <RotatedContainer tilt='down' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
+                <WithAnimation animation='up' type='scroll'>
+                    <ContentContainer>
+                        <Grid type='center'>
+                            {projectPanels}
+                        </Grid>
+                    </ContentContainer>
+                </WithAnimation>
+            </BackgroundImageRenderer>
+        );
+    }
+
+    render() {
+        const { isMobile } = this.props;
+
+        return (isMobile ?
+            <div className={styles.Mobile}>{this._renderMobileVersion()}</div> :
+            <div className={styles.Desktop}>{this._renderDesktopVersion()}</div>
+        );
+    }
 }
 
-export default Projects;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(Projects);

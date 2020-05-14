@@ -8,4 +8,14 @@ const updateProps = (element, propToAdd) => {
     }
 }
 
-export default updateProps;
+const updateObject = (oldObject, updatedProps) => {
+    return {
+        ...oldObject,
+        ...updatedProps
+    }
+}
+
+export {
+    updateObject,
+    updateProps
+}

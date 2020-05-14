@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import styles from './Home.module.scss';
 
 import Toolbar from '../SpaToolbar/Toolbar/Toolbar';
 import SplashPage from '../SplashPage/SplashPage';
 import { AboutMe, Projects, Resume, SkillSet } from '../../util/PageContainerUtil';
 import Footer from '../Footer/Footer';
 import Aux from '../../hoc/Aux/Aux';
+import Page from '../Page/Page';
 
 // Images
 import splashImage from '../../images/Gifs/coffee.gif';
@@ -30,9 +30,9 @@ class Home extends Component {
         const { pages } = this.state;
         const renderedPages = pages.map((page, index) => {
             return (
-                <div key={index} className={styles.Page}>
+                <Page key={index}>
                     {page}
-                </div>
+                </Page>
             )
         });
 

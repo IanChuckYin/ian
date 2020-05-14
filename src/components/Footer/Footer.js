@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Footer.module.scss';
+import { connect } from 'react-redux';
 
 import SplitContainer from '../SplitContainer/SplitContainer';
 import WithTypeAnimation from '../../hoc/WithTypeAnimation/WithTypeAnimation';
@@ -26,7 +27,10 @@ class Footer extends Component {
         },
     }
 
-    render() {
+    /**
+     * The desktop version of the Footer
+     */
+    _renderDesktopVersion() {
         const { name, location, email, phone } = this.state;
 
         const leftSide = (
@@ -62,6 +66,57 @@ class Footer extends Component {
             </div>
         );
     }
+
+    /**
+     * The mobile version of the Footer
+     */
+    _renderMobileVersion() {
+        const { name, location, email, phone } = this.state;
+
+        const nameContent = (
+            <WithTypeAnimation
+                className={styles.Top}
+                text={name}
+                speed={TYPE_ANIMATION_OPTIONS.speed}
+                type={TYPE_ANIMATION_OPTIONS.type} />
+        );
+
+        const contactContent = [location, email, phone].map((item, index) => {
+            return (
+                <div className={styles.Bottom} key={index}>
+                    <i className={item.icon} />
+                    <WithTypeAnimation
+                        key={index}
+                        text={item.text}
+                        speed={TYPE_ANIMATION_OPTIONS.speed}
+                        type={TYPE_ANIMATION_OPTIONS.type} />
+                </div>
+            )
+        });
+
+        return (
+            <div className={styles.Footer}>
+                {nameContent}
+                {contactContent}
+                <span className={styles.credits}>Image credits to: <a href="http://www.freepik.com">freepik</a></span>
+            </div>
+        );
+    }
+
+    render() {
+        const { isMobile } = this.props;
+
+        return (isMobile ?
+            <div className={styles.Mobile}>{this._renderMobileVersion()}</div> :
+            <div className={styles.Desktop}>{this._renderDesktopVersion()}</div>
+        );
+    }
 }
 
-export default Footer;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(Footer);

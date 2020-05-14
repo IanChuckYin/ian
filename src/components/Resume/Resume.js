@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Resume.module.scss';
+import { connect } from 'react-redux';
 
 import PageTitle from '../PageTitle/PageTitle';
 import Timeline from '../Timeline/Timeline';
@@ -164,11 +165,16 @@ class Resume extends Component {
         return experienceContainer;
     }
 
-    render() {
-        const { title, id } = this.props;
+    /**
+     * The desktop version of the Resume
+     */
+    _renderDesktopVersion() {
+        const { title } = this.props;
+        const educationContainer = this._renderEducationContainer();
+        const experienceContainer = this._renderExperienceContainer();
 
         return (
-            <BackgroundImageRenderer className={styles.Resume} id={id} image={resumeBackgroundImage}>
+            <BackgroundImageRenderer className={styles.Resume} image={resumeBackgroundImage}>
                 <Triangle />
                 <WithAnimation animation='up' type='scroll'>
                     <RotatedContainer tilt='up' deg='3'>
@@ -178,14 +184,55 @@ class Resume extends Component {
                 <WithAnimation animation='up' type='scroll'>
                     <ContentContainer>
                         <Timeline>
-                            {this._renderEducationContainer()}
-                            {this._renderExperienceContainer()}
+                            {educationContainer}
+                            {experienceContainer}
                         </Timeline>
                     </ContentContainer>
                 </WithAnimation>
             </BackgroundImageRenderer>
         );
     }
+
+    /**
+     * The mobile version of the Resume
+     */
+    _renderMobileVersion() {
+        const { title } = this.props;
+        const educationContainer = this._renderEducationContainer();
+        const experienceContainer = this._renderExperienceContainer();
+
+        return (
+            <BackgroundImageRenderer className={styles.Resume} image={resumeBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='up' type='scroll'>
+                    <RotatedContainer tilt='up' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
+                <WithAnimation animation='up' type='scroll'>
+                    <ContentContainer>
+                        {educationContainer}
+                        {experienceContainer}
+                    </ContentContainer>
+                </WithAnimation>
+            </BackgroundImageRenderer>
+        );
+    }
+
+    render() {
+        const { isMobile } = this.props;
+
+        return (isMobile ?
+            <div className={styles.Mobile}>{this._renderMobileVersion()}</div> :
+            <div className={styles.Desktop}>{this._renderDesktopVersion()}</div>
+        );
+    }
 }
 
-export default Resume;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(Resume);

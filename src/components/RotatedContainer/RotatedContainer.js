@@ -7,11 +7,11 @@ class RotatedContainer extends Component {
     static defaultProps = {
         tilt: 'up',
         deg: '3',
-        style: 'main'
+        containerStyle: 'main'
     }
 
     _getTiltStyle() {
-        const { tilt, deg, style } = this.props;
+        const { tilt, deg, containerStyle } = this.props;
         const tiltStyles = {};
         const shadowOptions = {
             up: {
@@ -25,10 +25,10 @@ class RotatedContainer extends Component {
         const containerOptions = { light: { backgroundColor: styles.color2 }, main: { backgroundColor: styles.color1 } };
 
         if (tilt === 'up') {
-            tiltStyles.normal = { ...tiltOptions.up, ...shadowOptions.up, ...containerOptions[style] };
+            tiltStyles.normal = { ...tiltOptions.up, ...shadowOptions.up, ...containerOptions[containerStyle] };
             tiltStyles.reverse = tiltOptions.down;
         } else {
-            tiltStyles.normal = { ...tiltOptions.down, ...shadowOptions.down, ...containerOptions[style] };
+            tiltStyles.normal = { ...tiltOptions.down, ...shadowOptions.down, ...containerOptions[containerStyle] };
             tiltStyles.reverse = tiltOptions.up;
         }
         return tiltStyles;

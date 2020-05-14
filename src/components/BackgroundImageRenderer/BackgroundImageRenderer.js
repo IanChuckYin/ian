@@ -7,14 +7,19 @@ class BackgroundImageRenderer extends Component {
         cover: true
     }
 
-    render() {
-        const { image, children, className, id, cover } = this.props;
-        const backgroundImage = {
+    _getBackgroundImage() {
+        const { image } = this.props;
+        return {
             backgroundImage: `url(${image})`
         };
+    }
+
+    render() {
+        const { children, className, cover } = this.props;
+        const backgroundImage = this._getBackgroundImage();
         const coverStyle = cover ? styles.Cover : null;
         return (
-            <div style={backgroundImage} className={appendStyles(className, styles.BackgroundImageRenderer, coverStyle)} id={id}>
+            <div style={backgroundImage} className={appendStyles(className, styles.BackgroundImageRenderer, coverStyle)} >
                 {children}
             </div>
         )

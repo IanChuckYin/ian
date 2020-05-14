@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import styles from './ContentContainer.module.scss';
+import { connect } from 'react-redux';
 
 class ContentContainer extends Component {
 
     render() {
-        const { children } = this.props;
+        const { children, isMobile } = this.props;
+        const renderedStyle = isMobile ? styles.MobileContentContainer : styles.DesktopContentContainer;
         return (
-            <div className={styles.ContentContainer}>
+            <div className={renderedStyle}>
                 {children}
             </div>
         );
     }
 }
 
-export default ContentContainer;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(ContentContainer);

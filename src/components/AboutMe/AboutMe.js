@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './AboutMe.module.scss';
+import { connect } from 'react-redux';
 
 import PageTitle from '../PageTitle/PageTitle';
 import ContentContainer from '../ContentContainer/ContentContainer';
@@ -33,15 +34,17 @@ class AboutMe extends Component {
         };
     }
 
-    render() {
-        const { title, id } = this.props;
+    /**
+     * The Desktop Version of our About Me
+     */
+    _renderDesktopVersion() {
+        const { title } = this.props;
         const { content } = this.state;
         let marginIncrement = 0;
-
         const leftContent = content.map((content, index) => {
             const aboutMeContent = (
                 <div className={styles.AboutMeContent} style={this._updateMargin(marginIncrement)}>
-                    <RotatedContainer tilt='down' deg='0' style='light'>
+                    <RotatedContainer tilt='down' deg='0' containerStyle='light'>
                         {content}
                     </RotatedContainer>
                     <div className={styles.BottomCaret} />
@@ -62,7 +65,7 @@ class AboutMe extends Component {
         );
 
         return (
-            <BackgroundImageRenderer className={styles.AboutMe} id={id} image={aboutMeBackgroundImage}>
+            <BackgroundImageRenderer className={styles.AboutMe} image={aboutMeBackgroundImage}>
                 <Triangle />
                 <WithAnimation animation='down' type='scroll'>
                     <RotatedContainer tilt='down' deg='3'>
@@ -81,6 +84,65 @@ class AboutMe extends Component {
             </BackgroundImageRenderer>
         );
     }
+
+    /**
+     * The Mobile Versio of our About Me
+     */
+    _renderMobileVersion() {
+        const { title } = this.props;
+        const { content } = this.state;
+        const renderedAboutMeContent = content.map((content, index) => {
+            const aboutMeContent = (
+                <div className={styles.AboutMeContent}>
+                    <RotatedContainer tilt='down' deg='0' containerStyle='light'>
+                        {content}
+                    </RotatedContainer>
+                    <div className={styles.BottomCaret} />
+                </div>
+            );
+            return (
+                <WithAnimation animation='right' type='scroll' key={index}>
+                    {aboutMeContent}
+                </WithAnimation>
+            );
+        });
+        const renderedImage = (
+            <WithAnimation animation='down' type='scroll'>
+                <img src={me} className={styles.Image} alt='' />
+            </WithAnimation>
+        )
+        return (
+            <BackgroundImageRenderer className={styles.AboutMe} image={aboutMeBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='down' type='scroll'>
+                    <RotatedContainer tilt='down' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
+                <WithAnimation animation='up' type='scroll'>
+                    <ContentContainer>
+                        {renderedImage}
+                        {renderedAboutMeContent}
+                    </ContentContainer>
+                </WithAnimation>
+            </BackgroundImageRenderer>
+        );
+    }
+
+    render() {
+        const { isMobile } = this.props;
+
+        return (isMobile ?
+            <div className={styles.Mobile}>{this._renderMobileVersion()}</div> :
+            <div className={styles.Desktop}>{this._renderDesktopVersion()}</div>
+        );
+    }
 }
 
-export default AboutMe;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(AboutMe);

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 
-import Layout from '../Layout/Layout';
-import Aux from '../../hoc/Aux/Aux';
-
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
 /**
@@ -36,15 +33,9 @@ class Router extends Component {
         <HashRouter basename={PUBLIC_URL}>
             {switchRoutes}
         </HashRouter>
-    ) : <Aux>
-            {switchRoutes}
-        </Aux>
+    ) : switchRoutes;
 
-    return (
-        <Layout>
-          {router}
-        </Layout>
-    );
+    return router;
   }
 }
 

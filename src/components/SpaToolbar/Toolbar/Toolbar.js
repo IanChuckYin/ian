@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Toolbar.module.scss';
+import { connect } from 'react-redux';
 
 import Toolbarbutton from '../ToolbarButton/ToolbarButton';
 import WithAnimation from '../../../hoc/WithAnimation/WithAnimation';
@@ -151,7 +152,7 @@ class Toolbar extends Component {
 
     // Render the toolbar components
     _renderToolbarButtons() {
-        const { items } = this.props;
+        const { items, isMobile } = this.props;
         const renderedButtons = items.map((item, index) => {
             const { title, id } = item.props;
             return (
@@ -160,6 +161,7 @@ class Toolbar extends Component {
                     selected={this._isButtonSelected(id)}
                     buttonLabel={title}
                     onClick={() => this._onButtonClick(item)}
+                    isMobile={isMobile}
                 />
             );
         });
@@ -167,9 +169,11 @@ class Toolbar extends Component {
     }
 
     render() {
+        const { isMobile } = this.props;
+        const renderedStyle = isMobile ? styles.MobileToolbar : styles.DesktopToolbar;
         return (
             <WithAnimation
-                className={styles.Toolbar}
+                className={renderedStyle}
                 animation={ANIMATION_OPTIONS.animation}
                 type={ANIMATION_OPTIONS.type}>
                 {this._renderToolbarButtons()}
@@ -178,4 +182,10 @@ class Toolbar extends Component {
     }
 }
 
-export default Toolbar;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(Toolbar);

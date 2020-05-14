@@ -1,36 +1,78 @@
 @import '../../styles/variables.scss';
 
-.Footer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: $color-2;
-    color: $color-4;
-    padding: 10px 50px;
-    box-sizing: border-box;
-    border-top: $section-border solid $color-4;
-}
-
-.Left {
-    font-size: 36px;
-    letter-spacing: 10px;
-}
-
-.Right {
-    font-size: 20px;
-    margin: 5px 0px;
-    letter-spacing: 1px;
-    display: flex;
-
-    i {
-        margin: 0px 5px;
+.Desktop {
+    .Footer {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: $color-2;
+        color: $color-4;
+        padding: 10px 50px;
+        box-sizing: border-box;
+        border-top: $section-border solid $color-4;
+    }
+    
+    .Left {
+        font-size: 36px;
+        letter-spacing: 10px;
+    }
+    
+    .Right {
+        font-size: 20px;
+        margin: 5px 0px;
+        letter-spacing: 1px;
+        display: flex;
+    
+        i {
+            margin: 0px 5px;
+        }
+    }
+    
+    .credits {
+        font-size: 12px;
+        a {
+            text-decoration: none;
+            color: $color-4;
+        }
     }
 }
 
-.credits {
-    font-size: 12px;
-    a {
-        text-decoration: none;
+
+.Mobile {
+    .Footer {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: $color-2;
         color: $color-4;
+        padding: 10px;
+        box-sizing: border-box;
+        border-top: $section-border solid $color-4;
+        text-align: center;
+    }
+    
+    .Top {
+        font-size: 20px;
+        letter-spacing: 10px;
+    }
+    
+    .Bottom {
+        font-size: 16px;
+        margin: 5px 0px;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: center;
+    
+        i {
+            margin: 0px 5px;
+        }
+    }
+    
+    .credits {
+        font-size: 12px;
+        a {
+            text-decoration: none;
+            color: $color-4;
+        }
     }
 }

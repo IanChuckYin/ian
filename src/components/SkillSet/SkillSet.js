@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './SkillSet.module.scss';
+import { connect } from 'react-redux';
 
 import PageTitle from '../PageTitle/PageTitle';
 import ContentContainer from '../ContentContainer/ContentContainer'
@@ -20,16 +21,6 @@ import skillSetBackgroundImage from '../../images/Backgrounds/paper-3.png';
 
 // Shapes
 import Triangle from '../Shapes/Triangle/Triangle';
-
-const PANEL_ANIMATION_OPTIONS = {
-    animation: 'expand',
-    type: 'scroll'
-}
-
-const CONTAINER_ANIMATION_OPTIONS = {
-    animation: 'up',
-    type: 'scroll'
-}
 
 class SkillSet extends Component {
     state = {
@@ -67,16 +58,19 @@ class SkillSet extends Component {
         ]
     }
 
-    render() {
-        const { title, id } = this.props;
+    /**
+     * The desktop version of SkillSet
+     */
+    _renderDesktopVersion() {
+        const { title } = this.props;
         const { content } = this.state;
         const skillSetPanels = content.map((skill, index) => {
             const { title, logo, description } = skill;
             return (
                 <WithAnimation
                     key={index}
-                    animation={PANEL_ANIMATION_OPTIONS.animation}
-                    type={PANEL_ANIMATION_OPTIONS.type}>
+                    animation='expand'
+                    type='scroll'>
                     <SkillSetPanel
                         image={logo}
                         title={title}
@@ -86,7 +80,7 @@ class SkillSet extends Component {
         });
 
         return (
-            <BackgroundImageRenderer className={styles.SkillSet} id={id} image={skillSetBackgroundImage}>
+            <BackgroundImageRenderer className={styles.SkillSet} image={skillSetBackgroundImage}>
                 <Triangle />
                 <WithAnimation animation='up' type='scroll'>
                     <RotatedContainer tilt='up' deg='3'>
@@ -94,8 +88,8 @@ class SkillSet extends Component {
                     </RotatedContainer>
                 </WithAnimation>
                 <WithAnimation
-                    animation={CONTAINER_ANIMATION_OPTIONS.animation}
-                    type={CONTAINER_ANIMATION_OPTIONS.type}>
+                    animation='up'
+                    type='scroll'>
                     <ContentContainer>
                         <Grid type='spread'>
                             {skillSetPanels}
@@ -105,6 +99,63 @@ class SkillSet extends Component {
             </BackgroundImageRenderer>
         );
     }
+    
+    /**
+     * The mobile version of SkillSet
+     */
+    _renderMobileVersion() {
+        const { title } = this.props;
+        const { content } = this.state;
+        const skillSetPanels = content.map((skill, index) => {
+            const { title, logo, description } = skill;
+            return (
+                <WithAnimation
+                    key={index}
+                    animation='expand'
+                    type='scroll'>
+                    <SkillSetPanel
+                        image={logo}
+                        title={title}
+                        description={description} />
+                </WithAnimation>
+            );
+        });
+
+        return (
+            <BackgroundImageRenderer className={styles.SkillSet} image={skillSetBackgroundImage}>
+                <Triangle />
+                <WithAnimation animation='up' type='scroll'>
+                    <RotatedContainer tilt='up' deg='3'>
+                        <PageTitle title={title} />
+                    </RotatedContainer>
+                </WithAnimation>
+                <WithAnimation
+                    animation='up'
+                    type='scroll'>
+                    <ContentContainer>
+                        <Grid type='spread'>
+                            {skillSetPanels}
+                        </Grid>
+                    </ContentContainer>
+                </WithAnimation>
+            </BackgroundImageRenderer>
+        );
+    }
+
+    render() {
+        const { isMobile } = this.props;
+
+        return (isMobile ?
+            <div className={styles.Mobile}>{this._renderMobileVersion()}</div> :
+            <div className={styles.Desktop}>{this._renderDesktopVersion()}</div>
+        );
+    }
 }
 
-export default SkillSet;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(SkillSet);

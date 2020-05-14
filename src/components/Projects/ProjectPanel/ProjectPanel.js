@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './ProjectPanel.module.scss';
+import { connect } from 'react-redux';
 
 import { appendStyles } from '../../../util/StyleAppender';
 import Button from '../../Button/Button';
@@ -13,7 +14,7 @@ class ProjectPanel extends Component {
     }
 
     render() {
-        const { image, buttons, size, children } = this.props;
+        const { image, buttons, size, children, isMobile } = this.props;
         const panelSize = this.SIZE[size];
         const renderedButtons = buttons ? buttons.map((button, index) => {
             return (
@@ -24,19 +25,23 @@ class ProjectPanel extends Component {
             );
         }) : null;
 
+        const renderedStyle = isMobile ? styles.Mobile : styles.Desktop;
+
         return (
-            <div className={appendStyles(styles.ProjectPanel, panelSize)}>
-                <div className={styles.ImageContainer}>
-                    <img src={image} alt='' />
-                </div>
-                <div className={styles.ContentContainer}>
-                    <div className={styles.TextContainer}>
-                        {children}
+            <div className={renderedStyle}>
+                <div className={appendStyles(styles.ProjectPanel, panelSize)}>
+                    <div className={styles.ImageContainer}>
+                        <img src={image} alt='' />
                     </div>
-                    <div className={styles.ButtonContainer}>
-                        <Grid type='spread'>
-                            {renderedButtons}
-                        </Grid>
+                    <div className={styles.ContentContainer}>
+                        <div className={styles.TextContainer}>
+                            {children}
+                        </div>
+                        <div className={styles.ButtonContainer}>
+                            <Grid type='spread'>
+                                {renderedButtons}
+                            </Grid>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,4 +49,10 @@ class ProjectPanel extends Component {
     }
 }
 
-export default ProjectPanel;
+const mapStateToProps = state => {
+    return {
+        isMobile: state.isMobile
+    };
+};
+
+export default connect(mapStateToProps, null)(ProjectPanel);

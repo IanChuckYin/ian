@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styles from './App.module.scss';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actions';
+import { isMobile } from '../../util/MobileUtil';
 
+import Layout from '../Layout/Layout';
 import Home from '../Home/Home';
 import Knights from '../Knights/Knights';
 import MarkovProject from '../MarkovProject/MarkovProject';
@@ -10,6 +14,12 @@ import Router from '../Router/Router';
  * The root of our App
  */
 class App extends Component {
+  componentDidMount() {
+    const { onAppLoaded, onDeviceDetected } = this.props;
+    onAppLoaded();
+    onDeviceDetected(isMobile());
+  }
+
   state = {
     routes: [
       {
@@ -29,13 +39,33 @@ class App extends Component {
 
   render() {
     const { routes } = this.state;
+    const { isLoaded } = this.props;
+    if (!isLoaded) {
+      return null;
+    };
 
     return (
       <div className={styles.App}>
-        <Router routes={routes} isHash={true} />
+        <Layout>
+          <Router routes={routes} isHash={true} />
+        </Layout>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isLoaded: state.isLoaded,
+    isMobile: state.isMobile
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAppLoaded: () => dispatch({ type: actionTypes.SET_APP_LOADED, isLoaded: true }),
+    onDeviceDetected: (isMobile) => dispatch({ type: actionTypes.SET_DEVICE_TYPE, isMobile: isMobile })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

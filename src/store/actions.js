@@ -1,0 +1,2 @@
+export const SET_DEVICE_TYPE = "SET_DEVICE_TYPE";
+export const SET_APP_LOADED = "SET_APP_LOADED";
