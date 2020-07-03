@@ -68,11 +68,11 @@ class Resume extends Component {
                     logo: unchartedLogo,
                     image: unchartedImage,
                     content: [
-                        "Full stack web application developer, part of the Causal Exploration team for DARPA",
+                        "Full stack web application developer, part of the team that engineers a user-interface for a research program related to visualization and interaction of executable causal models",
                         "Responsible for developing and maintaining client-side code using Ember.js as the JavaScript framework and Cytoscape for data visualization and analysis",
                         "Responsible for developing and maintaining server-side code using Node.js and Express",
                         "Performed code reviews for team members to ensure clean and efficient code that follows the team’s style guide",
-                        "Wrote and maintained unit tests for automated testing using QUnit"
+                        "Wrote and maintained unit tests for automated testing using QUnit and Mocha"
                     ]
                 },
                 {
